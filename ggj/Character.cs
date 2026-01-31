@@ -14,7 +14,7 @@ public partial class Character : CharacterBody2D
 	[Export] public float JumpHeight = 200.0f;
 	[Export] public float JumpTimetoPeak = 0.4f;
 	[Export] public float JumpTimeToDescent = 0.3f;
-	
+	d
 	[Export] public float DoubleJumpHeightMultiplier = 1.5f;
 	
 	[Export] public float GlideTimeToDescent = 0.9f;
@@ -94,53 +94,66 @@ public partial class Character : CharacterBody2D
 			GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("run");
 		}
 		
-		if (Input.IsActionPressed("left"))
+		if (Input.IsActionPressed("left")) {
 			GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = true;
-		if (Input.IsActionPressed("right"))
+			GetNode<Area2D>("AttackHitbox").SetScale(new Vector2(-1.0f, 1.0f));
+		}
+		if (Input.IsActionPressed("right")) {
 			GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = false;
+			GetNode<Area2D>("AttackHitbox").SetScale(new Vector2(1.0f, 1.0f));
+		}
 	}
 	
 	public override void _PhysicsProcess(double delta)
-{
-	float HorizontalVelocity = GetHorizontalVelocity() * Speed;
-	
-	if (IsOnFloor())
 	{
-		CanDoubleJump = true;
-		doubleJumpActive = false;
-		glideActive = false;
-		HorizontalVelocity *= 0.9f;
-	}
-	
-	Velocity = new Vector2(HorizontalVelocity, Velocity.Y);
-	
-	if (Input.IsActionJustPressed("up") && IsOnFloor())
-	{
-		Jump();
-	}
-	else if (Input.IsActionJustPressed("up") && !IsOnFloor() && CanDoubleJump)
-	{
-		DoubleJump();
-		CanDoubleJump = false;
-	}
-	
-	
-	// Glide
-	bool glideHeld = Input.IsActionPressed("glide");
-	glideActive = glideHeld && !IsOnFloor() && Velocity.Y > 0.0f;
-	
-	Velocity = new Vector2(
-		Velocity.X,
-		Velocity.Y + GetGravity() * (float)delta
-	);
-	
-	if (glideActive)
+		float HorizontalVelocity = GetHorizontalVelocity() * Speed;
+		
+		if (IsOnFloor())
+		{
+			CanDoubleJump = true;
+			doubleJumpActive = false;
+			glideActive = false;
+			HorizontalVelocity *= 0.9f;
+		}
+		
+		Velocity = new Vector2(HorizontalVelocity, Velocity.Y);
+		
+		if (Input.IsActionJustPressed("up") && IsOnFloor())
+		{
+			Jump();
+		}
+		else if (Input.IsActionJustPressed("up") && !IsOnFloor() && CanDoubleJump)
+		{
+			DoubleJump();
+			CanDoubleJump = false;
+		}
+		
+		// Glide
+		bool glideHeld = Input.IsActionPressed("glide");
+		glideActive = glideHeld && !IsOnFloor() && Velocity.Y > 0.0f;
+		
 		Velocity = new Vector2(
 			Velocity.X,
-			Mathf.Min(Velocity.Y, GlideTimeToDescent*Speed)
+			Velocity.Y + GetGravity() * (float)delta
 		);
-	
-	MoveAndSlide();
-}
+		
+		if (glideActive)
+			Velocity = new Vector2(
+				Velocity.X,
+				Mathf.Min(Velocity.Y, GlideTimeToDescent*Speed)
+			);
+		
+		if (Input.IsActionJustPressed("attack")) {
+			foreach (var node in GetNode<Area2D>("AttackHitbox").GetOverlappingBodies()) {
+				var damageable = node.GetNode<Damageable>("Damageable");
+				if (damageable != null) {
+					// ATAQUE BÁSICO: Socos - Dano de (6 - 10) em área
+					damageable.Attack(damageable, RandRange(6, 10));
+				}
+			}
+		}
+		
+		MoveAndSlide();
+	}
 
 }

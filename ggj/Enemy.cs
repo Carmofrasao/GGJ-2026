@@ -18,7 +18,6 @@ public partial class Enemy : CharacterBody2D
 	
 	public override void _PhysicsProcess(double delta)
 	{
-		Print("CurrentState = " + EnemyState.ChasingPlayer + " Player = " + Player);
 		if (CurrentState == EnemyState.ChasingPlayer && Player != null) {
 			var dir = Player.GlobalPosition.X - GlobalPosition.X;
 			Velocity = new Vector2(Mathf.Sign(dir) * Speed, Velocity.Y);

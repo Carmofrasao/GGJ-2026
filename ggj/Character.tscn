@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://l5fsvrohfcvc" path="res://player/player-run_0005_sprite-6.png" id="18_gh722"]
 [ext_resource type="Texture2D" uid="uid://dkcefvwe20dw4" path="res://player/player-run_0006_sprite-7.png" id="19_k301r"]
 [ext_resource type="Texture2D" uid="uid://bfcxw17vq5dyv" path="res://player/player-run_0007_sprite-8.png" id="20_8wbt7"]
+[ext_resource type="PackedScene" uid="uid://co41l4oe4bmjx" path="res://Damageable.tscn" id="21_rcm65"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iu5xb"]
 animations = [{
@@ -95,17 +96,30 @@ animations = [{
 radius = 27.0
 height = 108.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rcm65"]
+size = Vector2(83, 108)
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=883167378 groups=["Player"]]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 2
+collision_mask = 7
 script = ExtResource("2_7ig0a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=997032692]
 scale = Vector2(0.09, 0.09)
 sprite_frames = SubResource("SpriteFrames_iu5xb")
 animation = &"run"
-frame_progress = 0.07352484
+frame_progress = 0.0735145
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=802677230]
 shape = SubResource("CapsuleShape2D_oolk3")
 debug_color = Color(0.09654651, 0.61018115, 0.6174744, 0.41960785)
+
+[node name="Damageable" parent="." unique_id=2057706334 instance=ExtResource("21_rcm65")]
+
+[node name="AttackHitbox" type="Area2D" parent="." unique_id=1787072685]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=1063934101]
+position = Vector2(41.5, 0)
+shape = SubResource("RectangleShape2D_rcm65")

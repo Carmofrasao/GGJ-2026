@@ -4,7 +4,7 @@
 [ext_resource type="TileSet" uid="uid://dx7lb08alicbh" path="res://Placeholder_ART/tileset.tres" id="2_m21nb"]
 [ext_resource type="PackedScene" uid="uid://lobqv4xddv3n" path="res://Enemy.tscn" id="3_f85up"]
 
-[node name="Node2D" type="Node2D" unique_id=519061000]
+[node name="Node2D2" type="Node2D" unique_id=519061000]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1005184049]
 
