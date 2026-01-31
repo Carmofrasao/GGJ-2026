@@ -1,8 +1,24 @@
 [gd_scene format=3 uid="uid://d2qhc6d1yyxpf"]
 
 [ext_resource type="PackedScene" uid="uid://c25dj31djvgqh" path="res://Character.tscn" id="1_t6lng"]
+[ext_resource type="PackedScene" uid="uid://c23paoq5liy2c" path="res://Ground.tscn" id="2_4cvuw"]
 
 [node name="Node2D" type="Node2D" unique_id=519061000]
 
+[node name="Ground" parent="." unique_id=1074266864 instance=ExtResource("2_4cvuw")]
+position = Vector2(189, 169)
+
+[node name="Ground" parent="Ground" unique_id=1953599580 instance=ExtResource("2_4cvuw")]
+position = Vector2(-57, 0)
+
+[node name="Ground" parent="Ground/Ground" unique_id=1439348080 instance=ExtResource("2_4cvuw")]
+position = Vector2(114, 1)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1005184049]
+
 [node name="Sprite2D" parent="." unique_id=1772057090 instance=ExtResource("1_t6lng")]
-position = Vector2(189.1771, 128.74655)
+position = Vector2(189, 126)
+Speed = 200
+JumpHeight = 100.0
+JumpTimetoPeak = 0.5
+JumpTimeToDescent = 0.4

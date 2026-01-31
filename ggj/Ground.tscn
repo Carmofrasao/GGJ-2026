@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c23paoq5liy2c"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ulns0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfy80"]
+size = Vector2(56, 56)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tycio"]
+width = 56
+height = 56
+
+[node name="Ground" type="StaticBody2D" unique_id=1074266864]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1348433607]
+material = SubResource("CanvasItemMaterial_ulns0")
+shape = SubResource("RectangleShape2D_dfy80")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1023775929]
+texture = SubResource("NoiseTexture2D_tycio")
