@@ -11,9 +11,7 @@
 [node name="Sprite2D" parent="." unique_id=1772057090 instance=ExtResource("1_t6lng")]
 z_index = 1
 position = Vector2(-874, 56)
-Speed = 200
 JumpHeight = 100.0
-JumpTimetoPeak = 0.5
 JumpTimeToDescent = 0.4
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1916966252]
