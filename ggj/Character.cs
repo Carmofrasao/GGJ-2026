@@ -1,19 +1,23 @@
 using Godot;
 using System;
+using static Godot.GD;
 
 public partial class Character : CharacterBody2D
 {
-	[Export] public int Speed { get; set; } = 200;
+	[Export] public int Speed { get; set; } = 350;
 	
+	[Export] public float CurrentHorizontalSpeed = 0;
 	
-	[Export] public float JumpHeight = 110.0f;
-	[Export] public float JumpTimetoPeak = 0.5f;
-	[Export] public float JumpTimeToDescent = 0.35f;
+	[Export] public float HorizontalDecaySpeed = 0.09f;
+	[Export] public float HorizontalAcceleration = 0.15f;
 	
-	[Export] public float DoubleJumpHeightMultiplier = 1.1f;
-	[Export] public float DoubleJumpFallTimeMultiplier = 0.9f;
+	[Export] public float JumpHeight = 200.0f;
+	[Export] public float JumpTimetoPeak = 0.4f;
+	[Export] public float JumpTimeToDescent = 0.3f;
 	
-	[Export] public float GlideTimeToDescent = 3.0f;
+	[Export] public float DoubleJumpHeightMultiplier = 1.5f;
+	
+	[Export] public float GlideTimeToDescent = 0.9f;
 	
 	 public bool CanDoubleJump;
 	 public bool doubleJumpActive = false;
@@ -24,12 +28,6 @@ public partial class Character : CharacterBody2D
 	
 	 // Minha maluquice
 	 public float DoubleJumpVelocity;
-	 public float DoubleJumpGravity;
-	 public float DoubleFallGravity;
-	
-	// Minha maluquice glide
-	public float GlideFallGravity;
-	public float DoubleGlideFallGravity;
 	
 	public override void _Ready()
 	{
@@ -41,45 +39,36 @@ public partial class Character : CharacterBody2D
 		// Double jump: 1.5x height, same time-to-peak => scale both v0 and gravity by height multiplier
 		float H2 = JumpHeight * DoubleJumpHeightMultiplier;
 
-		DoubleJumpVelocity = ((2.0f * H2) / JumpTimetoPeak) * -1.0f;
-		DoubleJumpGravity  = ((-2.0f * H2) / (JumpTimetoPeak * JumpTimetoPeak)) * -1.0f;
-
-		// Double fall: choose gravity so fall time scales by DoubleJumpFallTimeMultiplier
-		// g2 = g * (heightMult / timeMult^2)
-		float FallGravityMultiplier = DoubleJumpHeightMultiplier / (DoubleJumpFallTimeMultiplier * DoubleJumpFallTimeMultiplier);
-		DoubleFallGravity = FallGravity * FallGravityMultiplier;
-		
-		// Glide fall gravity (same height, longer descent time)
-		GlideFallGravity = ((-2.0f * JumpHeight) / (GlideTimeToDescent * GlideTimeToDescent)) * -1.0f;
-		DoubleGlideFallGravity = GlideFallGravity * FallGravityMultiplier;
-		
+		DoubleJumpVelocity = (H2 / JumpTimetoPeak) * -1.0f;
 	}
 	
-	public float GetInput()
+	public float GetHorizontalVelocity()
 	{
-		float horizontal = 0.0f;
-
+		if (!Input.IsActionPressed("left") && !Input.IsActionPressed("right")) {
+			if (CurrentHorizontalSpeed > 0)
+				CurrentHorizontalSpeed = Mathf.Max(0, CurrentHorizontalSpeed - HorizontalDecaySpeed);
+			else
+				CurrentHorizontalSpeed = Mathf.Min(0, CurrentHorizontalSpeed + HorizontalDecaySpeed);
+			
+			return CurrentHorizontalSpeed;
+		}
+		
 		if (Input.IsActionPressed("left"))
-			horizontal = -1.0f;
-
+			CurrentHorizontalSpeed -= HorizontalAcceleration;
 		if (Input.IsActionPressed("right"))
-			horizontal = 1.0f;
+			CurrentHorizontalSpeed += HorizontalAcceleration;
+			
+		CurrentHorizontalSpeed = Mathf.Clamp(CurrentHorizontalSpeed, -2.0f, 2.0f);
 
-		return horizontal;
+		return CurrentHorizontalSpeed;
 	}
 
 	public float GetGravity()
 	{
 		bool rising = Velocity.Y < 0.0f;
-
 		if (rising)
-			return doubleJumpActive ? DoubleJumpGravity : JumpGravity;
-
-		// falling:
-		if (doubleJumpActive)
-			return glideActive ? DoubleGlideFallGravity : DoubleFallGravity;
-
-		return glideActive ? GlideFallGravity : FallGravity;
+			return JumpGravity;
+		return FallGravity;
 	}
 	
 	public void Jump()
@@ -96,8 +85,6 @@ public partial class Character : CharacterBody2D
 		GD.Print("DoubleJump");
 
 		doubleJumpActive = true;
-		GD.Print("DoubleJumpGravity: ", DoubleJumpGravity);
-		GD.Print("DoubleFallGravity: ", DoubleFallGravity);
 		GD.Print("DoubleJumpVelocity: ", DoubleJumpVelocity);
 		Velocity = new Vector2(Velocity.X, DoubleJumpVelocity);
 	}
@@ -111,14 +98,17 @@ public partial class Character : CharacterBody2D
 	
 	public override void _PhysicsProcess(double delta)
 {
-	Velocity = new Vector2(GetInput() * Speed, Velocity.Y);
+	float HorizontalVelocity = GetHorizontalVelocity() * Speed;
 	
 	if (IsOnFloor())
 	{
 		CanDoubleJump = true;
 		doubleJumpActive = false;
 		glideActive = false;
+		HorizontalVelocity *= 0.9f;
 	}
+	
+	Velocity = new Vector2(HorizontalVelocity, Velocity.Y);
 	
 	if (Input.IsActionJustPressed("up") && IsOnFloor())
 	{
@@ -138,6 +128,14 @@ public partial class Character : CharacterBody2D
 		Velocity.X,
 		Velocity.Y + GetGravity() * (float)delta
 	);
+	
+	Print("Velocity.Y: " + Velocity.Y);
+	if (glideActive)
+		Velocity = new Vector2(
+			Velocity.X,
+			Mathf.Min(Velocity.Y, GlideTimeToDescent*Speed)
+		);
+	
 	MoveAndSlide();
 }
 
