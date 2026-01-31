@@ -4,7 +4,7 @@ using static Godot.GD;
 
 public partial class Character : CharacterBody2D
 {
-	[Export] public int Speed { get; set; } = 350;
+	[Export] public int Speed { get; set; } = 200;
 	
 	[Export] public float CurrentHorizontalSpeed = 0;
 	
@@ -93,7 +93,16 @@ public partial class Character : CharacterBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{	
+		if (!Input.IsActionPressed("left") && !Input.IsActionPressed("right")) {
+			GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("idle");
+		} else {
+			GetNode<AnimatedSprite2D>("AnimatedSprite2D").Stop();
+		}
 		
+		if (Input.IsActionPressed("left"))
+			GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = true;
+		if (Input.IsActionPressed("right"))
+			GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = false;
 	}
 	
 	public override void _PhysicsProcess(double delta)
@@ -120,6 +129,7 @@ public partial class Character : CharacterBody2D
 		CanDoubleJump = false;
 	}
 	
+	
 	// Glide
 	bool glideHeld = Input.IsActionPressed("glide");
 	glideActive = glideHeld && !IsOnFloor() && Velocity.Y > 0.0f;
@@ -129,7 +139,6 @@ public partial class Character : CharacterBody2D
 		Velocity.Y + GetGravity() * (float)delta
 	);
 	
-	Print("Velocity.Y: " + Velocity.Y);
 	if (glideActive)
 		Velocity = new Vector2(
 			Velocity.X,
