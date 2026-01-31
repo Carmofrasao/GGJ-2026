@@ -2,34 +2,24 @@ using Godot;
 using System;
 using static Godot.GD;
 
+enum EnemyState {
+	Idle,
+	ChasingPlayer,
+	Stunned,
+	OnAttackCooldown
+};
+
 public partial class Enemy : CharacterBody2D
 {
 	private float Speed = 500;
-	private bool IsChasing = false;
-	private Node2D Player = null;
 	private float Gravity = 500;
-	
-	private void OnArea2DBodyEntered(Node2D body)
-	{
-		GD.Print("Algo entrou: ", body.Name);
-		if (body is Node2D player && body.IsInGroup("Player"))
-		{
-			Player = player;
-			IsChasing = true;
-			GD.Print("Player entrou na área");
-		}
-	}
-	
-	private void OnArea2DBodyExited(Node2D body)
-	{
-		Print("saiu");
-		Player = null;
-		IsChasing = false;
-	}
+	private Node2D Player;
+	private EnemyState CurrentState = EnemyState.Idle;
 	
 	public override void _PhysicsProcess(double delta)
 	{
-		if (IsChasing && Player != null) {
+		Print("CurrentState = " + EnemyState.ChasingPlayer + " Player = " + Player);
+		if (CurrentState == EnemyState.ChasingPlayer && Player != null) {
 			var dir = Player.GlobalPosition.X - GlobalPosition.X;
 			Velocity = new Vector2(Mathf.Sign(dir) * Speed, Velocity.Y);
 		} else {
@@ -40,11 +30,52 @@ public partial class Enemy : CharacterBody2D
 			Velocity.X,
 			Velocity.Y + 200 * (float)delta
 		);
-			
-		Print("Velocity: " + Velocity);
 		
 		MoveAndSlide();
 	}
 	
+	public void ReceiveDamage() {
+		CurrentState = EnemyState.Stunned;
+	}
 	
+	public override void _Process(double delta) 
+	{
+		switch (CurrentState) {
+			case EnemyState.Idle:
+				foreach (var node in GetNode<Area2D>("AwareArea").GetOverlappingBodies()) {
+					if (node is Node2D player) {
+						Player = node;
+						CurrentState = EnemyState.ChasingPlayer;
+						break;
+					}
+				}
+				break;
+			case EnemyState.ChasingPlayer:
+				foreach (var node in GetNode<Area2D>("AttackRange").GetOverlappingBodies()) {
+					if (node is Node2D player) {
+						// player.RECEIVEDAMAGE();
+						CurrentState = EnemyState.OnAttackCooldown;
+						GetNode<Timer>("CooldownTimer").Start();
+						break;
+					}
+				}
+				foreach (var node in GetNode<Area2D>("AwareArea").GetOverlappingBodies()) {
+					if (node is Node2D player) {
+						Player = player;
+						CurrentState = EnemyState.ChasingPlayer;
+						break;
+					}
+				}
+				CurrentState = EnemyState.Idle;
+				break;
+			case EnemyState.OnAttackCooldown:
+				if (GetNode<Timer>("CooldownTimer").IsStopped())
+					CurrentState = EnemyState.Idle;
+				break;
+			case EnemyState.Stunned:
+				if (GetNode<Timer>("StunTimer").IsStopped())
+					CurrentState = EnemyState.Idle;
+				break;
+		}
+	}
 }
