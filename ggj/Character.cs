@@ -73,19 +73,14 @@ public partial class Character : CharacterBody2D
 	
 	public void Jump()
 	{
-		GD.Print("JumpGravity: ", JumpGravity);
-		GD.Print("FallGravity: ", FallGravity);
-		GD.Print("Jump Velocity: ", JumpVelocity);
 		Velocity = new Vector2(Velocity.X, JumpVelocity);
 	}
 	
 	public void DoubleJump()
 	{
 		if (!CanDoubleJump) return;
-		GD.Print("DoubleJump");
 
 		doubleJumpActive = true;
-		GD.Print("DoubleJumpVelocity: ", DoubleJumpVelocity);
 		Velocity = new Vector2(Velocity.X, DoubleJumpVelocity);
 	}
 
@@ -138,6 +133,7 @@ public partial class Character : CharacterBody2D
 		Velocity.X,
 		Velocity.Y + GetGravity() * (float)delta
 	);
+	
 	
 	if (glideActive)
 		Velocity = new Vector2(
