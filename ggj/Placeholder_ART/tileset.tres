@@ -1,0 +1,17 @@
+[gd_resource type="TileSet" format=3 uid="uid://dx7lb08alicbh"]
+
+[ext_resource type="Texture2D" uid="uid://d0gism4rhq8ec" path="res://Placeholder_ART/Ground.png" id="1_lm6d6"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lm6d6"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6yu5s"]
+texture = ExtResource("1_lm6d6")
+texture_region_size = Vector2i(54, 54)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-27, -27, 27, -27, 27, 27, -27, 27)
+
+[resource]
+tile_size = Vector2i(54, 54)
+physics_layer_0/collision_layer = 1
+physics_layer_0/physics_material = SubResource("PhysicsMaterial_lm6d6")
+sources/0 = SubResource("TileSetAtlasSource_6yu5s")
