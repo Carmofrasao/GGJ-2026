@@ -91,7 +91,7 @@ public partial class Character : CharacterBody2D
 		if (!Input.IsActionPressed("left") && !Input.IsActionPressed("right")) {
 			GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("idle");
 		} else {
-			GetNode<AnimatedSprite2D>("AnimatedSprite2D").Stop();
+			GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("run");
 		}
 		
 		if (Input.IsActionPressed("left"))
@@ -133,7 +133,6 @@ public partial class Character : CharacterBody2D
 		Velocity.X,
 		Velocity.Y + GetGravity() * (float)delta
 	);
-	
 	
 	if (glideActive)
 		Velocity = new Vector2(
