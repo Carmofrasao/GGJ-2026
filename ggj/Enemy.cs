@@ -52,9 +52,11 @@ public partial class Enemy : CharacterBody2D
 			case EnemyState.ChasingPlayer:
 				foreach (var node in GetNode<Area2D>("AttackRange").GetOverlappingBodies()) {
 					if (node is Node2D player) {
-						// player.RECEIVEDAMAGE();
-						CurrentState = EnemyState.OnAttackCooldown;
-						GetNode<Timer>("CooldownTimer").Start();
+						var damageable = node.GetNode<Damageable>("Damageable");
+						if (damageable != null) {
+							GetNode<Damageable>("Damageable").Attack(damageable, 1.1f*RandRange(6, 10));
+						}
+						CurrentState = EnemyState.ChasingPlayer;
 						break;
 					}
 				}
@@ -66,10 +68,6 @@ public partial class Enemy : CharacterBody2D
 					}
 				}
 				CurrentState = EnemyState.Idle;
-				break;
-			case EnemyState.OnAttackCooldown:
-				if (GetNode<Timer>("CooldownTimer").IsStopped())
-					CurrentState = EnemyState.Idle;
 				break;
 			case EnemyState.Stunned:
 				if (GetNode<Timer>("StunTimer").IsStopped())

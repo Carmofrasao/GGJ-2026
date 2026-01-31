@@ -14,7 +14,7 @@ public partial class Character : CharacterBody2D
 	[Export] public float JumpHeight = 200.0f;
 	[Export] public float JumpTimetoPeak = 0.4f;
 	[Export] public float JumpTimeToDescent = 0.3f;
-	d
+
 	[Export] public float DoubleJumpHeightMultiplier = 1.5f;
 	
 	[Export] public float GlideTimeToDescent = 0.9f;
@@ -148,7 +148,7 @@ public partial class Character : CharacterBody2D
 				var damageable = node.GetNode<Damageable>("Damageable");
 				if (damageable != null) {
 					// ATAQUE BÁSICO: Socos - Dano de (6 - 10) em área
-					damageable.Attack(damageable, RandRange(6, 10));
+					GetNode<Damageable>("Damageable").Attack(damageable, RandRange(6, 10));
 				}
 			}
 		}

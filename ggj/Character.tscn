@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://0qkgu2e0shxi" path="res://Character.cs" id="2_7ig0a"]
 [ext_resource type="Texture2D" uid="uid://dn11ec4b3dmwv" path="res://player/sprite-player_0000s_0000_sprite-11.png" id="2_k17t1"]
+[ext_resource type="Shader" uid="uid://bckancsrgfabn" path="res://FlashColor.gdshader" id="2_mj5a2"]
 [ext_resource type="Texture2D" uid="uid://bm31acd15dr62" path="res://player/sprite-player_0001s_0000_sprite-10.png" id="3_0var5"]
 [ext_resource type="Texture2D" uid="uid://c06u3hovqhnjx" path="res://player/sprite-player_0002s_0000_sprite-9.png" id="4_36d8b"]
 [ext_resource type="Texture2D" uid="uid://dvgmveht1hyw7" path="res://player/sprite-player_0003s_0000_sprite-8.png" id="5_rbaxm"]
@@ -21,6 +22,11 @@
 [ext_resource type="Texture2D" uid="uid://dkcefvwe20dw4" path="res://player/player-run_0006_sprite-7.png" id="19_k301r"]
 [ext_resource type="Texture2D" uid="uid://bfcxw17vq5dyv" path="res://player/player-run_0007_sprite-8.png" id="20_8wbt7"]
 [ext_resource type="PackedScene" uid="uid://co41l4oe4bmjx" path="res://Damageable.tscn" id="21_rcm65"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iu5xb"]
+shader = ExtResource("2_mj5a2")
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+shader_parameter/flash_percent = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iu5xb"]
 animations = [{
@@ -99,12 +105,13 @@ height = 108.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rcm65"]
 size = Vector2(83, 108)
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=883167378 groups=["Player"]]
+[node name="Character" type="CharacterBody2D" unique_id=883167378 groups=["Player"]]
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("2_7ig0a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=997032692]
+material = SubResource("ShaderMaterial_iu5xb")
 scale = Vector2(0.09, 0.09)
 sprite_frames = SubResource("SpriteFrames_iu5xb")
 animation = &"run"
@@ -114,7 +121,9 @@ frame_progress = 0.0735145
 shape = SubResource("CapsuleShape2D_oolk3")
 debug_color = Color(0.09654651, 0.61018115, 0.6174744, 0.41960785)
 
-[node name="Damageable" parent="." unique_id=2057706334 instance=ExtResource("21_rcm65")]
+[node name="Damageable" parent="." unique_id=1870789681 node_paths=PackedStringArray("ShadedSprite") instance=ExtResource("21_rcm65")]
+InitialHealth = 33.0
+ShadedSprite = NodePath("../AnimatedSprite2D")
 
 [node name="AttackHitbox" type="Area2D" parent="." unique_id=1787072685]
 collision_layer = 0
