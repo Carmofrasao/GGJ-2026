@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://lobqv4xddv3n"]
+
+[ext_resource type="Script" uid="uid://d21vtlug72wk4" path="res://enemy.gd" id="1_s7bn3"]
+[ext_resource type="Texture2D" uid="uid://ct720xnps77gt" path="res://Placeholder_ART/Player.png" id="1_tt7e2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gqquq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tt7e2"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=941317421]
+script = ExtResource("1_s7bn3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1620792455]
+shape = SubResource("CapsuleShape2D_gqquq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1324364151]
+texture = ExtResource("1_tt7e2")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1781359147]
+collision_layer = 3
+collision_mask = 3
+
+[node name="Detect" type="CollisionShape2D" parent="Area2D" unique_id=1193813503]
+light_mask = 3
+visibility_layer = 3
+scale = Vector2(10.71, 10.71)
+shape = SubResource("CircleShape2D_tt7e2")
+debug_color = Color(0.85394335, 0.31867146, 0.49112046, 0.41960785)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

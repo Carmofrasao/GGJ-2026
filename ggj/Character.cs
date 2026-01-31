@@ -16,6 +16,7 @@ public partial class Character : CharacterBody2D
 	
 	public override void _Ready()
 	{
+		AddToGroup("Player");
 		JumpVelocity = ((2.0f * JumpHeight) / JumpTimetoPeak) * -1.0f;
 		JumpGravity = ((-2.0f * JumpHeight) / (JumpTimetoPeak * JumpTimetoPeak)) * -1.0f;
 		FallGravity = ((-2.0f * JumpHeight) / (JumpTimeToDescent * JumpTimeToDescent)) * -1.0f;

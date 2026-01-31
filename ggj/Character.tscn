@@ -7,7 +7,9 @@
 radius = 27.0
 height = 108.0
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=883167378]
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=883167378 groups=["Player"]]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("2_7ig0a")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1772057090]
