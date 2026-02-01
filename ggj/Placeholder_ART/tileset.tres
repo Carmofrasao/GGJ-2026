@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" format=3 uid="uid://dx7lb08alicbh"]
 
 [ext_resource type="Texture2D" uid="uid://d0gism4rhq8ec" path="res://Placeholder_ART/Ground.png" id="1_lm6d6"]
-[ext_resource type="Texture2D" uid="uid://cddfefrkn5pf4" path="res://tileset/GGJam-Tiles(alpha)-semBackground.png" id="2_6yu5s"]
+[ext_resource type="Texture2D" uid="uid://dat4fs8if2sxw" path="res://tileset/GGJam-Tiles2x(alpha01)-semBackground.png" id="2_6yu5s"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lm6d6"]
 
@@ -54,7 +54,6 @@ texture_region_size = Vector2i(54, 54)
 5:0/0/terrain = 0
 5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-27, -27, 27, -27, 27, 27, -27, 27)
 5:0/0/terrains_peering_bit/right_side = 0
-5:0/0/terrains_peering_bit/bottom_right_corner = 0
 5:0/0/terrains_peering_bit/bottom_side = 0
 5:0/0/terrains_peering_bit/bottom_left_corner = 0
 5:0/0/terrains_peering_bit/left_side = 0
@@ -65,7 +64,6 @@ texture_region_size = Vector2i(54, 54)
 6:0/0/terrains_peering_bit/right_side = 0
 6:0/0/terrains_peering_bit/bottom_right_corner = 0
 6:0/0/terrains_peering_bit/bottom_side = 0
-6:0/0/terrains_peering_bit/bottom_left_corner = 0
 6:0/0/terrains_peering_bit/left_side = 0
 7:0/0 = 0
 7:0/0/terrain_set = 0
@@ -127,6 +125,7 @@ texture_region_size = Vector2i(54, 54)
 2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-27, -27, 27, -27, 27, 27, -27, 27)
 2:1/0/terrains_peering_bit/bottom_side = 0
 2:1/0/terrains_peering_bit/left_side = 0
+2:1/0/terrains_peering_bit/top_left_corner = 0
 2:1/0/terrains_peering_bit/top_side = 0
 3:1/0 = 0
 3:1/0/terrain_set = 0
@@ -154,14 +153,12 @@ texture_region_size = Vector2i(54, 54)
 5:1/0/terrains_peering_bit/left_side = 0
 5:1/0/terrains_peering_bit/top_left_corner = 0
 5:1/0/terrains_peering_bit/top_side = 0
-5:1/0/terrains_peering_bit/top_right_corner = 0
 6:1/0 = 0
 6:1/0/terrain_set = 0
 6:1/0/terrain = 0
 6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-27, -27, 27, -27, 27, 27, -27, 27)
 6:1/0/terrains_peering_bit/right_side = 0
 6:1/0/terrains_peering_bit/left_side = 0
-6:1/0/terrains_peering_bit/top_left_corner = 0
 6:1/0/terrains_peering_bit/top_side = 0
 6:1/0/terrains_peering_bit/top_right_corner = 0
 7:1/0 = 0
