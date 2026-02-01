@@ -167,15 +167,19 @@ public partial class Character : CharacterBody2D
 			);
 		
 		if (Input.IsActionJustPressed("attack")) {
-			GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("punch");
-			IsAttacking = true;
-			GetNode<AudioStreamPlayer>("PunchPlayer").Play();
+			if (GetNode<Damageable>("Damageable").GetNode<Timer>("AttackCooldownTimer").IsStopped()) {
+				IsAttacking = true;
+				GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("punch");
+				GetNode<AudioStreamPlayer>("PunchPlayer").Play();
+			}
 			foreach (var node in GetNode<Area2D>("AttackHitbox").GetOverlappingBodies()) {
 				var damageable = node.GetNode<Damageable>("Damageable");
 				if (damageable != null) {
 					GetNode<Damageable>("Damageable").Attack(damageable, 1);
 				}
 			}
+			if (GetNode<Damageable>("Damageable").GetNode<Timer>("AttackCooldownTimer").IsStopped())
+				GetNode<Damageable>("Damageable").GetNode<Timer>("AttackCooldownTimer").Start();
 		}
 		
 		if (IsAttacking && (

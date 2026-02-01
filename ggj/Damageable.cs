@@ -39,9 +39,9 @@ public partial class Damageable : Node2D
 		return true;
 	}
 	
-	public void Attack(Damageable damageable, float damageAmount) {
+	public bool Attack(Damageable damageable, float damageAmount) {
 		if (!GetNode<Timer>("AttackCooldownTimer").IsStopped()) {
-			return;
+			return false;
 		}
 		GetNode<Timer>("AttackCooldownTimer").Start();
 		if (damageable.TakeDamage(damageAmount)) {
@@ -53,5 +53,6 @@ public partial class Damageable : Node2D
 				}
 			}
 		}
+		return true;
 	}
 }
