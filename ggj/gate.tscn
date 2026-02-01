@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://clq71sv14srnh"]
+
+[ext_resource type="Script" uid="uid://cv1lelor830ux" path="res://Gate.cs" id="1_15vrf"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_15vrf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3efw5"]
+size = Vector2(20, 216)
+
+[node name="Node2D" type="StaticBody2D" unique_id=1930140143 node_paths=PackedStringArray("sprite", "collision")]
+script = ExtResource("1_15vrf")
+sprite = NodePath("Sprite2D")
+collision = NodePath("CollisionShape2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1266766640]
+position = Vector2(381.5, 119.00001)
+scale = Vector2(0.037109375, 0.4296875)
+texture = SubResource("NoiseTexture2D_15vrf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1775152490]
+position = Vector2(376, 121)
+shape = SubResource("RectangleShape2D_3efw5")
