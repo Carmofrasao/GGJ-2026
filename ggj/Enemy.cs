@@ -5,6 +5,7 @@ using static Godot.GD;
 enum EnemyState {
 	Idle,
 	ChasingPlayer,
+	OnPreAttackCooldown,
 	Stunned,
 	OnAttackCooldown
 };
@@ -77,16 +78,12 @@ public partial class Enemy : CharacterBody2D
 					}
 				}
 				break;
-			case EnemyState.ChasingPlayer:
+			case EnemyState.ChasingPlayer: {
 				bool ok = false;
 				foreach (var node in GetNode<Area2D>("AttackRange").GetOverlappingBodies()) {
 					if (node is Node2D player) {
-						var damageable = node.GetNode<Damageable>("Damageable");
-						if (damageable != null) {
-							GetNode<Damageable>("Damageable").Attack(damageable, 1.1f*RandRange(6, 10));
-						}
-						CurrentState = EnemyState.OnAttackCooldown;
-						GetNode<Timer>("AttackCooldownTimer").Start();
+						CurrentState = EnemyState.OnPreAttackCooldown;
+						GetNode<Timer>("PreAttackCooldownTimer").Start();
 						ok = true;
 						break;
 					}
@@ -103,6 +100,27 @@ public partial class Enemy : CharacterBody2D
 				if (!ok)
 					CurrentState = EnemyState.Idle;
 				break;
+			}
+			case EnemyState.OnPreAttackCooldown: {
+				if (!GetNode<Timer>("PreAttackCooldownTimer").IsStopped())
+					break;
+				bool ok = false;
+				foreach (var node in GetNode<Area2D>("AttackRange").GetOverlappingBodies()) {
+					if (node is Node2D player) {
+						var damageable = node.GetNode<Damageable>("Damageable");
+						if (damageable != null) {
+							GetNode<Damageable>("Damageable").Attack(damageable, 1.1f*RandRange(6, 10));
+						}
+						CurrentState = EnemyState.OnAttackCooldown;
+						GetNode<Timer>("AttackCooldownTimer").Start();
+						ok = true;
+						break;
+					}
+				}
+				if (!ok)
+					CurrentState = EnemyState.Idle;
+				break;
+			}	
 			case EnemyState.OnAttackCooldown:
 				if (GetNode<Timer>("AttackCooldownTimer").IsStopped())
 					CurrentState = EnemyState.Idle;
