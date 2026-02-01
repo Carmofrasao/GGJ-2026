@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://cwbnja2pff6vt"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1083162075]
+
+[node name="Control" type="Control" parent="." unique_id=383503610]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Control" unique_id=145620730]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.5
+offset_top = -33.0
+offset_right = 39.5
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/AspectRatioContainer" unique_id=256236272]
+layout_mode = 2
+alignment = 1
+
+[node name="Continue" type="Button" parent="Control/AspectRatioContainer/VBoxContainer" unique_id=1037765352]
+layout_mode = 2
+text = "Start Game"
+
+[node name="Exit" type="Button" parent="Control/AspectRatioContainer/VBoxContainer" unique_id=1276439057]
+layout_mode = 2
+text = "Exit
+"

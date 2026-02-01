@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://wdb6c4pyh8fr"]
+
+[ext_resource type="Script" uid="uid://cm47dvcxapmgc" path="res://Menu.cs" id="1_uubjt"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1423933993 node_paths=PackedStringArray("Continue", "Quit")]
+script = ExtResource("1_uubjt")
+Continue = NodePath("Control/AspectRatioContainer/VBoxContainer/Continue")
+Quit = NodePath("Control/AspectRatioContainer/VBoxContainer/Quit To Menu")
+
+[node name="Control" type="Control" parent="." unique_id=1026260973]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Control" unique_id=1602023209]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/AspectRatioContainer" unique_id=875508419]
+layout_mode = 2
+alignment = 1
+
+[node name="Continue" type="Button" parent="Control/AspectRatioContainer/VBoxContainer" unique_id=878270561]
+layout_mode = 2
+text = "Continue
+"
+
+[node name="Quit To Menu" type="Button" parent="Control/AspectRatioContainer/VBoxContainer" unique_id=689574992]
+layout_mode = 2
+text = "Quit to Menu"
+
+[connection signal="pressed" from="Control/AspectRatioContainer/VBoxContainer/Continue" to="." method="OnContinuePressed"]

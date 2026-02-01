@@ -20,6 +20,8 @@ public partial class Character : CharacterBody2D
 	
 	[Export] public float GlideTimeToDescent = 0.9f;
 	
+	[Export] public Menu Menu;
+	
 	
 	 public float KnockbackSpeed = 0.0f;
 	
@@ -49,6 +51,13 @@ public partial class Character : CharacterBody2D
 	
 	public float GetHorizontalVelocity()
 	{
+		if(Input.IsActionPressed("menu"))
+		{
+			GetTree().Paused = true;
+			Menu.Visible = true;
+			
+		}
+		
 		CurrentHorizontalSpeed += KnockbackSpeed;
 		if (KnockbackSpeed > 0)
 			KnockbackSpeed = Mathf.Max(0, KnockbackSpeed - 3*HorizontalDecaySpeed);
