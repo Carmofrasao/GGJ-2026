@@ -3,6 +3,9 @@ using System;
 
 public partial class Damageable : Node2D
 {
+	[Signal]
+	public delegate void SetHealthEventHandler(float  CurrentHealth);
+	
 	[Export] public float Health;
 	[Export] public AnimatedSprite2D ShadedSprite;
 	
@@ -18,6 +21,7 @@ public partial class Damageable : Node2D
 		}
 		GetNode<Timer>("InvulTimer").Start();
 		Health = Mathf.Max(0.0f, Health - damageAmount);
+		EmitSignal(nameof(SetHealth), Health);
 		if (Health == 0) {
 			// DIE!
 			GD.Print("Died!");

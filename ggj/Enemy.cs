@@ -116,7 +116,7 @@ public partial class Enemy : CharacterBody2D
 					if (node is Node2D player) {
 						var damageable = node.GetNode<Damageable>("Damageable");
 						if (damageable != null) {
-							GetNode<Damageable>("Damageable").Attack(damageable, 1.1f*RandRange(6, 10));
+							GetNode<Damageable>("Damageable").Attack(damageable, 1);
 						}
 						CurrentState = EnemyState.OnAttackCooldown;
 						GetNode<Timer>("AttackCooldownTimer").Start();

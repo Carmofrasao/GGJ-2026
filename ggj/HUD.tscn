@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bsmpsodb2jtxk"]
+
+[ext_resource type="Texture2D" uid="uid://cvm23qiqe8itn" path="res://tileset/MASKLAYOUT.png" id="1_k5de2"]
+[ext_resource type="Script" uid="uid://dkfycbu5wqlse" path="res://Hud.cs" id="1_ne771"]
+[ext_resource type="Texture2D" uid="uid://dnr478cx0dmih" path="res://tileset/Low_HP.png" id="2_vow1y"]
+[ext_resource type="Texture2D" uid="uid://blvdy8bhvuegu" path="res://tileset/Full_HP.png" id="3_ne771"]
+
+[node name="HUD" type="CanvasLayer" unique_id=820533709 node_paths=PackedStringArray("Mask", "LifeBar")]
+script = ExtResource("1_ne771")
+Mask = NodePath("Control/AspectRatioContainer/HBoxContainer/TextureRect6")
+LifeBar = NodePath("Control/AspectRatioContainer/HBoxContainer/AspectRatioContainer/TextureProgressBar")
+
+[node name="Control" type="Control" parent="." unique_id=504869391]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Control" unique_id=1246852399]
+layout_mode = 1
+offset_right = 760.0
+offset_bottom = 216.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/AspectRatioContainer" unique_id=66735222]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect6" type="TextureRect" parent="Control/AspectRatioContainer/HBoxContainer" unique_id=349525815]
+layout_mode = 2
+texture = ExtResource("1_k5de2")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="Control/AspectRatioContainer/HBoxContainer" unique_id=1664210256]
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control/AspectRatioContainer/HBoxContainer/AspectRatioContainer" unique_id=260034950]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 5.0
+value = 5.0
+texture_under = ExtResource("2_vow1y")
+texture_progress = ExtResource("3_ne771")

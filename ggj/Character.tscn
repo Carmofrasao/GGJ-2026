@@ -174,7 +174,7 @@ shape = SubResource("CapsuleShape2D_oolk3")
 debug_color = Color(0.09654651, 0.61018115, 0.6174744, 0.41960785)
 
 [node name="Damageable" parent="." unique_id=1870789681 node_paths=PackedStringArray("ShadedSprite") instance=ExtResource("21_rcm65")]
-Health = 33.0
+Health = 5.0
 ShadedSprite = NodePath("../AnimatedSprite2D")
 
 [node name="AttackHitbox" type="Area2D" parent="." unique_id=1787072685]
@@ -184,3 +184,5 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=1063934101]
 position = Vector2(41.5, 0)
 shape = SubResource("RectangleShape2D_rcm65")
+
+[connection signal="SetHealth" from="Damageable" to="Damageable" method="TakeDamage"]

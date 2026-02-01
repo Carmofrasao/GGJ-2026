@@ -4,6 +4,7 @@ using static Godot.GD;
 
 public partial class Character : CharacterBody2D
 {
+
 	[Export] public int Speed { get; set; } = 200;
 	
 	[Export] public float CurrentHorizontalSpeed = 0;
@@ -18,6 +19,7 @@ public partial class Character : CharacterBody2D
 	[Export] public float DoubleJumpHeightMultiplier = 1.5f;
 	
 	[Export] public float GlideTimeToDescent = 0.9f;
+	
 	
 	 public float KnockbackSpeed = 0.0f;
 	
@@ -173,7 +175,7 @@ public partial class Character : CharacterBody2D
 				var damageable = node.GetNode<Damageable>("Damageable");
 				if (damageable != null) {
 					// ATAQUE BÁSICO: Socos - Dano de (6 - 10) em área
-					GetNode<Damageable>("Damageable").Attack(damageable, RandRange(6, 10));
+					GetNode<Damageable>("Damageable").Attack(damageable, 1);
 				}
 			}
 		}
