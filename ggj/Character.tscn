@@ -24,8 +24,11 @@
 [ext_resource type="Texture2D" uid="uid://dk3hauv2lve84" path="res://player/player-run_0004_sprite-5.png" id="17_jfs23"]
 [ext_resource type="Texture2D" uid="uid://e436m1adlcus" path="res://player/player-jump-3.png" id="18_b2lkh"]
 [ext_resource type="Texture2D" uid="uid://l5fsvrohfcvc" path="res://player/player-run_0005_sprite-6.png" id="18_gh722"]
+[ext_resource type="Texture2D" uid="uid://b7xpiy7683cpx" path="res://player/punc_0002_sprite-2.png" id="19_gw0m8"]
 [ext_resource type="Texture2D" uid="uid://dkcefvwe20dw4" path="res://player/player-run_0006_sprite-7.png" id="19_k301r"]
 [ext_resource type="Texture2D" uid="uid://bfcxw17vq5dyv" path="res://player/player-run_0007_sprite-8.png" id="20_8wbt7"]
+[ext_resource type="Texture2D" uid="uid://bpwnfbf2rchqo" path="res://player/punc_0000_sprite-3.png" id="20_b2lkh"]
+[ext_resource type="Texture2D" uid="uid://c261ig8ti6a6n" path="res://player/punc_0001_sprite-1.png" id="21_0f5f2"]
 [ext_resource type="PackedScene" uid="uid://co41l4oe4bmjx" path="res://Damageable.tscn" id="21_rcm65"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iu5xb"]
@@ -100,6 +103,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("19_gw0m8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_b2lkh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_0f5f2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_b2lkh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_gw0m8")
+}],
+"loop": false,
+"name": &"punch",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("14_jfs23")
 }, {
 "duration": 1.0,
@@ -144,7 +167,7 @@ script = ExtResource("2_7ig0a")
 material = SubResource("ShaderMaterial_iu5xb")
 scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_iu5xb")
-animation = &"jump_down"
+animation = &"punch"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=802677230]
 shape = SubResource("CapsuleShape2D_oolk3")

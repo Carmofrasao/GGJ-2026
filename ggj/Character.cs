@@ -27,6 +27,7 @@ public partial class Character : CharacterBody2D
 	 public float JumpVelocity;
 	 public float JumpGravity;
 	 public float FallGravity;
+	 public bool IsAttacking = false;
 	
 	 // Minha maluquice
 	 public float DoubleJumpVelocity;
@@ -99,7 +100,7 @@ public partial class Character : CharacterBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{	
-		if (IsOnFloor())
+		if (IsOnFloor() && !IsAttacking)
 			if (!Input.IsActionPressed("left") && !Input.IsActionPressed("right")) {
 				GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("idle");
 			} else {
@@ -165,7 +166,9 @@ public partial class Character : CharacterBody2D
 				Mathf.Min(Velocity.Y, GlideTimeToDescent*Speed)
 			);
 		
-		if (Input.IsActionJustPressed("attack")) {
+		if (Input.IsActionJustPressed("attack") && IsOnFloor()) {
+			GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("punch");
+			IsAttacking = true;
 			foreach (var node in GetNode<Area2D>("AttackHitbox").GetOverlappingBodies()) {
 				var damageable = node.GetNode<Damageable>("Damageable");
 				if (damageable != null) {
@@ -174,6 +177,12 @@ public partial class Character : CharacterBody2D
 				}
 			}
 		}
+		
+		if (IsAttacking && (
+			GetNode<AnimatedSprite2D>("AnimatedSprite2D").Animation != "punch"
+			|| !GetNode<AnimatedSprite2D>("AnimatedSprite2D").IsPlaying()
+		))
+			IsAttacking = false;
 		
 		MoveAndSlide();
 	}
