@@ -101,7 +101,9 @@ position = Vector2(2477, 1075)
 [node name="HUD" parent="." unique_id=820533709 node_paths=PackedStringArray("Player") instance=ExtResource("6_kyfrf")]
 Player = NodePath("../Player")
 
-[node name="Menu" parent="." unique_id=1423933993 instance=ExtResource("8_0ch8u")]
+[node name="CanvasLayer" parent="." unique_id=1423933993 instance=ExtResource("8_0ch8u")]
+process_mode = 3
+layer = 10
 visible = false
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="OnBodyEntered"]

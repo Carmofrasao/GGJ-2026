@@ -158,10 +158,11 @@ height = 90.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rcm65"]
 size = Vector2(83, 108)
 
-[node name="Character" type="CharacterBody2D" unique_id=883167378 groups=["Player"]]
+[node name="Character" type="CharacterBody2D" unique_id=883167378 node_paths=PackedStringArray("Menu") groups=["Player"]]
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("2_7ig0a")
+Menu = NodePath("")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=997032692]
 material = SubResource("ShaderMaterial_iu5xb")
