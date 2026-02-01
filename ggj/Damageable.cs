@@ -25,7 +25,12 @@ public partial class Damageable : Node2D
 		if (Health == 0) {
 			// DIE!
 			GD.Print("Died!");
+			if (GetParent() is Character)
+			{
+				GetTree().ChangeSceneToFile("res://MainMenu.tscn");
+			}
 			GetParent().QueueFree();
+			
 		}
 		GetNode<Timer>("FlashTimer").Start();
 		if (GetParent() is Enemy enemy) {

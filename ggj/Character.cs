@@ -100,7 +100,7 @@ public partial class Character : CharacterBody2D
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
-	{	
+	{
 		if (IsOnFloor() && !IsAttacking)
 			if (!Input.IsActionPressed("left") && !Input.IsActionPressed("right")) {
 				GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("idle");

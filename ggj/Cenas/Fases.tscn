@@ -99,7 +99,7 @@ position = Vector2(2477, 1075)
 
 [node name="HUD" parent="." unique_id=820533709 node_paths=PackedStringArray("Player") instance=ExtResource("6_kyfrf")]
 process_mode = 3
-Player = NodePath("")
+Player = NodePath("../Player")
 
 [node name="Menu" parent="." unique_id=1423933993 instance=ExtResource("8_0ch8u")]
 process_mode = 3
