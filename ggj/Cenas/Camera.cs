@@ -9,6 +9,8 @@ using System;
 public partial class Camera : Camera2D
 {
 	[Export] public Character character;
+	
+	public bool zoomIn {get; set;}
 
 	private static readonly Vector2[] CamTopLefts =
 	{
