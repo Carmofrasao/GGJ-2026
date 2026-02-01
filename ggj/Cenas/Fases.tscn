@@ -103,19 +103,14 @@ shape = SubResource("RectangleShape2D_5alwl")
 [node name="Node2D" parent="." unique_id=1930140143 instance=ExtResource("5_5alwl")]
 position = Vector2(2477, 1075)
 
-<<<<<<< HEAD
 [node name="HUD" parent="." unique_id=820533709 node_paths=PackedStringArray("Player") instance=ExtResource("6_kyfrf")]
 Player = NodePath("../Sprite2D")
 
-[node name="Enemy" parent="." unique_id=941317421 instance=ExtResource("7_mkkwu")]
-position = Vector2(-507, 114)
-
 [node name="Menu" parent="." unique_id=1423933993 instance=ExtResource("8_0ch8u")]
 visible = false
-=======
+
 [node name="RhythmicEnemy" parent="." unique_id=785729474 instance=ExtResource("3_kyfrf")]
 position = Vector2(195, 114)
->>>>>>> e54e77e (Fase Feita)
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="OnBodyEntered"]
 [connection signal="body_exited" from="Area2D" to="Area2D" method="OnBodyExited"]

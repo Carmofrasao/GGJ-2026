@@ -22,7 +22,6 @@ public partial class Character : CharacterBody2D
 	
 	[Export] public Menu Menu;
 	
-	
 	 public float KnockbackSpeed = 0.0f;
 	
 	 public bool CanDoubleJump;
