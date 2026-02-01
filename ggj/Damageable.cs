@@ -37,5 +37,10 @@ public partial class Damageable : Node2D
 		}
 		GetNode<Timer>("AttackCooldownTimer").Start();
 		damageable.TakeDamage(damageAmount);
+		var a = (Character)damageable.GetParent();
+		if (GetParent().GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH)
+			a.KnockbackSpeed = -1f;
+		else
+			a.KnockbackSpeed = 1f;
 	}
 }

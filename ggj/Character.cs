@@ -19,6 +19,8 @@ public partial class Character : CharacterBody2D
 	
 	[Export] public float GlideTimeToDescent = 0.9f;
 	
+	 public float KnockbackSpeed = 0.0f; 
+	
 	 public bool CanDoubleJump;
 	 public bool doubleJumpActive = false;
 	 public bool glideActive = false;
@@ -44,6 +46,12 @@ public partial class Character : CharacterBody2D
 	
 	public float GetHorizontalVelocity()
 	{
+		CurrentHorizontalSpeed += KnockbackSpeed;
+		if (KnockbackSpeed > 0)
+			KnockbackSpeed = Mathf.Max(0, KnockbackSpeed - 3*HorizontalDecaySpeed);
+		else if (KnockbackSpeed < 0)
+			KnockbackSpeed = Mathf.Min(0, KnockbackSpeed + 3*HorizontalDecaySpeed);
+		
 		if (!Input.IsActionPressed("left") && !Input.IsActionPressed("right")) {
 			if (CurrentHorizontalSpeed > 0)
 				CurrentHorizontalSpeed = Mathf.Max(0, CurrentHorizontalSpeed - HorizontalDecaySpeed);

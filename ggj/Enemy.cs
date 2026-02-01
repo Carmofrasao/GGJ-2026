@@ -16,7 +16,7 @@ public partial class Enemy : CharacterBody2D
 	private Node2D Player;
 	private EnemyState CurrentState = EnemyState.Idle;
 	private float CurrentHorizontalSpeed = 0;
-	[Export] public float HorizontalDecaySpeed = 0.09f;
+	[Export] public float HorizontalDecaySpeed = 0.3f;
 	[Export] public float HorizontalAcceleration = 0.15f;
 	
 	public float GetHorizontalVelocity(float dir)
@@ -30,10 +30,15 @@ public partial class Enemy : CharacterBody2D
 			return CurrentHorizontalSpeed;
 		}
 		
-		if (dir == -1)
+		if (dir == -1) {
 			CurrentHorizontalSpeed -= HorizontalAcceleration;
-		if (dir == +1)
+			GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = true;
+			GetNode<Area2D>("AwareArea").Scale = new Vector2(-1.0f, 1.0f);
+		} else if (dir == +1) {
 			CurrentHorizontalSpeed += HorizontalAcceleration;
+			GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = false;
+			GetNode<Area2D>("AwareArea").Scale = new Vector2(1.0f, 1.0f);
+		}
 			
 		CurrentHorizontalSpeed = Mathf.Clamp(CurrentHorizontalSpeed, -2.0f, 2.0f);
 
