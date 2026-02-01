@@ -16,7 +16,6 @@ public partial class Hud : CanvasLayer
 	
 	public void SetHealth(float Health)
 	{
-		GD.Print("atualizei a vida");
 		LifeBar.Value = Health;
 	}
 

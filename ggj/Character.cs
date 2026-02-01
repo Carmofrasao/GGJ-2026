@@ -152,7 +152,6 @@ public partial class Character : CharacterBody2D
 		}
 		
 		if (Velocity.Y > 0.0f && !IsOnFloor()) {
-			GD.Print(Velocity.Y);
 			GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("jump_down");
 		}
 		
@@ -176,13 +175,12 @@ public partial class Character : CharacterBody2D
 				Mathf.Min(Velocity.Y, GlideTimeToDescent*Speed)
 			);
 		
-		if (Input.IsActionJustPressed("attack") && IsOnFloor()) {
+		if (Input.IsActionJustPressed("attack")) {
 			GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("punch");
 			IsAttacking = true;
 			foreach (var node in GetNode<Area2D>("AttackHitbox").GetOverlappingBodies()) {
 				var damageable = node.GetNode<Damageable>("Damageable");
 				if (damageable != null) {
-					// ATAQUE BÁSICO: Socos - Dano de (6 - 10) em área
 					GetNode<Damageable>("Damageable").Attack(damageable, 1);
 				}
 			}

@@ -10,6 +10,7 @@ radius = 26.0
 height = 108.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qp131"]
+resource_local_to_scene = true
 shader = ExtResource("2_e6d4v")
 shader_parameter/flash_color = Color(1, 0, 0, 1)
 shader_parameter/flash_percent = 0.0
