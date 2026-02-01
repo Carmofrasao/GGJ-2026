@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://8fu8bepie81e"]
+
+[ext_resource type="Script" uid="uid://3y7qiye58nmc" path="res://Cenas/MascaraVermelha.cs" id="1_628r0"]
+[ext_resource type="Texture2D" uid="uid://d2m04u45nlhji" path="res://masks/Máscara vermelha.png" id="2_fmkip"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w6165"]
+radius = 90.33
+
+[node name="Mascara Vermelha" type="Node2D" unique_id=34186266]
+script = ExtResource("1_628r0")
+
+[node name="MáscaraVermelha" type="Sprite2D" parent="." unique_id=1651841489]
+position = Vector2(2615, -91)
+texture = ExtResource("2_fmkip")
+
+[node name="MascaraVermelhaArea2D" type="Area2D" parent="." unique_id=384512688]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MascaraVermelhaArea2D" unique_id=268982372]
+position = Vector2(2614, -91)
+shape = SubResource("CircleShape2D_w6165")
+
+[connection signal="body_entered" from="MascaraVermelhaArea2D" to="." method="OnBodyEnteredArea"]

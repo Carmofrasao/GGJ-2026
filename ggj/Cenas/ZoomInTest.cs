@@ -38,6 +38,9 @@ public partial class ZoomInTest : Area2D
 		camera.zoomIn = false;
 		camera.setZoom(new Vector2(1f, 1f));
 		
+		GetParent().GetNode<AudioStreamPlayer>("MusicPlayer").Stop();
+		GetParent().GetNode<AudioStreamPlayer>("BossPlayer").Play();
+		
 		gate.setGate();
 	}
 }

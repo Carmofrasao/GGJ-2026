@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://btinmoyjr1cxs"
+path="res://.godot/imported/Batalha Final.mp3-f94d3469045395d0b641bc5fdbbb627d.mp3str"
+
+[deps]
+
+source_file="res://musicsfx/Batalha Final.mp3"
+dest_files=["res://.godot/imported/Batalha Final.mp3-f94d3469045395d0b641bc5fdbbb627d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

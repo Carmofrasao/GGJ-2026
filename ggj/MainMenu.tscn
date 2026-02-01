@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cwbnja2pff6vt"]
 
 [ext_resource type="Script" uid="uid://bpuy224bu8jyl" path="res://main_menu.gd" id="1_i26rj"]
+[ext_resource type="AudioStream" uid="uid://cm7mwn0pirxd3" path="res://musicsfx/Flashback ou Plot.mp3" id="2_eiy7p"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1083162075]
 script = ExtResource("1_i26rj")
@@ -28,8 +29,25 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/AspectRatioContainer" unique_id=256236272]
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/AspectRatioContainer/VBoxContainer" unique_id=1231940617]
+layout_mode = 2
+bbcode_enabled = true
+text = "[font_size=50]Trash Hunter[/font_size]
+
+[font_size=25]
+• David Saade Machado
+• Daniel Carlos Alfredo (Dany)
+• Fernando Monteiro Kiotheka
+• Anderson Frasão
+• André Felipe de Almeida Pontes
+• Gabriel Pimentel Dolzan
+• Gustavo Pimentel Dal'Asta"
+fit_content = true
+horizontal_alignment = 1
 
 [node name="Continue" type="Button" parent="Control/AspectRatioContainer/VBoxContainer" unique_id=1037765352]
 layout_mode = 2
@@ -39,6 +57,10 @@ text = "Start Game"
 layout_mode = 2
 text = "Exit
 "
+
+[node name="MainMenuPlayer" type="AudioStreamPlayer" parent="." unique_id=1620965728]
+stream = ExtResource("2_eiy7p")
+autoplay = true
 
 [connection signal="pressed" from="Control/AspectRatioContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="Control/AspectRatioContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

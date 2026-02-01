@@ -1,38 +1,11 @@
 [gd_scene format=3 uid="uid://lobqv4xddv3n"]
 
 [ext_resource type="Script" uid="uid://c0ixmeorvhw7g" path="res://Enemy.cs" id="1_s7bn3"]
-[ext_resource type="Shader" uid="uid://bckancsrgfabn" path="res://FlashColor.gdshader" id="2_e6d4v"]
 [ext_resource type="PackedScene" uid="uid://co41l4oe4bmjx" path="res://Damageable.tscn" id="3_2hac7"]
-[ext_resource type="Texture2D" uid="uid://d0v26k4wuwvws" path="res://enemy/lixo_0000_Camada-5.png" id="3_6do27"]
-[ext_resource type="Texture2D" uid="uid://dmyheuf24vuq7" path="res://enemy/lixo_0001_Camada-4.png" id="4_rvmyp"]
-[ext_resource type="Texture2D" uid="uid://b4jba6wvnh2rn" path="res://enemy/lixo_0002_Camada-3.png" id="5_2nxwx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gqquq"]
 radius = 26.0
 height = 108.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qp131"]
-resource_local_to_scene = true
-shader = ExtResource("2_e6d4v")
-shader_parameter/flash_color = Color(1, 0, 0, 1)
-shader_parameter/flash_percent = 0.0
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_2hac7"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_6do27")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_rvmyp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_2nxwx")
-}],
-"loop": true,
-"name": &"default",
-"speed": 12.0
-}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s7bn3"]
 radius = 8.445272
@@ -44,13 +17,6 @@ script = ExtResource("1_s7bn3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1620792455]
 shape = SubResource("CapsuleShape2D_gqquq")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=697757901]
-material = SubResource("ShaderMaterial_qp131")
-scale = Vector2(0.143, 0.143)
-sprite_frames = SubResource("SpriteFrames_2hac7")
-autoplay = "default"
-frame_progress = 0.8526919
 
 [node name="AwareArea" type="Area2D" parent="." unique_id=1781359147]
 collision_layer = 0
@@ -74,7 +40,7 @@ debug_color = Color(0.85394335, 0.31867146, 0.49112046, 0.41960785)
 one_shot = true
 
 [node name="Damageable" parent="." unique_id=1870789681 node_paths=PackedStringArray("ShadedSprite") instance=ExtResource("3_2hac7")]
-ShadedSprite = NodePath("../AnimatedSprite2D")
+ShadedSprite = NodePath("")
 InvulTime = 0.1
 
 [node name="AttackCooldownTimer" type="Timer" parent="." unique_id=1684148817]

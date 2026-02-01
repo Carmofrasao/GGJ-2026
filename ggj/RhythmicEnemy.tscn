@@ -1,6 +1,33 @@
 [gd_scene format=3 uid="uid://bcqf5gotp0ss3"]
 
 [ext_resource type="PackedScene" uid="uid://lobqv4xddv3n" path="res://Enemy.tscn" id="1_6g5hg"]
+[ext_resource type="Shader" uid="uid://bckancsrgfabn" path="res://FlashColor.gdshader" id="2_ijmyw"]
+[ext_resource type="Texture2D" uid="uid://d0v26k4wuwvws" path="res://enemy/lixo_0000_Camada-5.png" id="3_lstp0"]
+[ext_resource type="Texture2D" uid="uid://dmyheuf24vuq7" path="res://enemy/lixo_0001_Camada-4.png" id="4_868p4"]
+[ext_resource type="Texture2D" uid="uid://b4jba6wvnh2rn" path="res://enemy/lixo_0002_Camada-3.png" id="5_a7c3y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_evwlh"]
+resource_local_to_scene = true
+shader = ExtResource("2_ijmyw")
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+shader_parameter/flash_percent = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2whp4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_lstp0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_868p4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_a7c3y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
 
 [node name="RhythmicEnemy" type="Node2D" unique_id=723617817]
 
@@ -9,3 +36,14 @@ InitialHealth = 2.0
 StunTime = 0.5
 AttackCooldownTime = 1.0
 PreAttackCooldownTime = 1.0
+
+[node name="Damageable" parent="Enemy" index="4" unique_id=1870789681 node_paths=PackedStringArray("ShadedSprite")]
+ShadedSprite = NodePath("../AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Enemy" unique_id=767098923]
+material = SubResource("ShaderMaterial_evwlh")
+scale = Vector2(0.143, 0.143)
+sprite_frames = SubResource("SpriteFrames_2whp4")
+autoplay = "default"
+
+[editable path="Enemy"]
