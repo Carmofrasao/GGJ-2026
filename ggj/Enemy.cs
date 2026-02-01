@@ -39,7 +39,7 @@ public partial class Enemy : CharacterBody2D
 			GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = false;
 			GetNode<Area2D>("AwareArea").Scale = new Vector2(1.0f, 1.0f);
 		}
-			
+		
 		CurrentHorizontalSpeed = Mathf.Clamp(CurrentHorizontalSpeed, -2.0f, 2.0f);
 
 		return CurrentHorizontalSpeed;
@@ -47,12 +47,11 @@ public partial class Enemy : CharacterBody2D
 	
 	public override void _PhysicsProcess(double delta)
 	{
+		var dir = 0.0f;
 		if (CurrentState == EnemyState.ChasingPlayer && Player != null) {
-			var dir = Mathf.Sign(Player.GlobalPosition.X - GlobalPosition.X);
-			Velocity = new Vector2(GetHorizontalVelocity(dir) * Speed, Velocity.Y);
-		} else {
-			Velocity = new Vector2(Mathf.Lerp(Velocity.X * 0.8f, 0.0f, 0.1f), Velocity.Y);
+			dir = Mathf.Sign(Player.GlobalPosition.X - GlobalPosition.X);
 		}
+		Velocity = new Vector2(GetHorizontalVelocity(dir) * Speed, Velocity.Y);
 		
 		Velocity = new Vector2(
 			Velocity.X,

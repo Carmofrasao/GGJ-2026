@@ -17,9 +17,9 @@ public partial class Damageable : Node2D
 		((ShaderMaterial)ShadedSprite.GetMaterial()).SetShaderParameter("flash_percent", percent);
 	}
 	
-	public void TakeDamage(float damageAmount) {
+	public bool TakeDamage(float damageAmount) {
 		if (!GetNode<Timer>("InvulTimer").IsStopped()) {
-			return;
+			return false;
 		}
 		GetNode<Timer>("InvulTimer").Start();
 		Health = Mathf.Max(0.0f, Health - damageAmount);
@@ -29,6 +29,7 @@ public partial class Damageable : Node2D
 			GetParent().QueueFree();
 		}
 		GetNode<Timer>("FlashTimer").Start();
+		return true;
 	}
 	
 	public void Attack(Damageable damageable, float damageAmount) {
@@ -36,11 +37,13 @@ public partial class Damageable : Node2D
 			return;
 		}
 		GetNode<Timer>("AttackCooldownTimer").Start();
-		damageable.TakeDamage(damageAmount);
-		var a = (Character)damageable.GetParent();
-		if (GetParent().GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH)
-			a.KnockbackSpeed = -1f;
-		else
-			a.KnockbackSpeed = 1f;
+		if (damageable.TakeDamage(damageAmount)) {
+			var a = (Character)damageable.GetParent();
+			if (GetParent().GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH) {
+				a.KnockbackSpeed = -1f;
+			} else {
+				a.KnockbackSpeed = 1f;
+			}
+		}
 	}
 }

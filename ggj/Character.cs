@@ -19,7 +19,7 @@ public partial class Character : CharacterBody2D
 	
 	[Export] public float GlideTimeToDescent = 0.9f;
 	
-	 public float KnockbackSpeed = 0.0f; 
+	 public float KnockbackSpeed = 0.0f;
 	
 	 public bool CanDoubleJump;
 	 public bool doubleJumpActive = false;
@@ -143,6 +143,11 @@ public partial class Character : CharacterBody2D
 		Velocity = new Vector2(
 			Velocity.X,
 			Velocity.Y + GetGravity() * (float)delta
+		);
+		
+		Velocity = new Vector2(
+			Velocity.X,
+			Velocity.Y - 300*Mathf.Abs(KnockbackSpeed)
 		);
 		
 		if (glideActive)
