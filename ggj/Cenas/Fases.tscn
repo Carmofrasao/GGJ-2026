@@ -21,7 +21,7 @@ tile_set = ExtResource("1_p785x")
 [node name="Sprite2D" parent="." unique_id=883167378 node_paths=PackedStringArray("Menu") instance=ExtResource("2_bq0rg")]
 z_index = 1
 position = Vector2(-818, 83)
-Menu = NodePath("../Menu")
+Menu = NodePath("../CanvasLayer")
 
 [node name="Sala1" type="Camera2D" parent="." unique_id=1837960590 node_paths=PackedStringArray("character")]
 position = Vector2(-972, -540)
@@ -68,7 +68,9 @@ Player = NodePath("../Sprite2D")
 [node name="Enemy" parent="." unique_id=941317421 instance=ExtResource("7_mkkwu")]
 position = Vector2(-507, 114)
 
-[node name="Menu" parent="." unique_id=1423933993 instance=ExtResource("8_0ch8u")]
+[node name="CanvasLayer" parent="." unique_id=1423933993 instance=ExtResource("8_0ch8u")]
+process_mode = 3
+layer = 10
 visible = false
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="OnBodyEntered"]

@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://cwbnja2pff6vt"]
 
+[ext_resource type="Script" uid="uid://bpuy224bu8jyl" path="res://main_menu.gd" id="1_i26rj"]
+
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1083162075]
+script = ExtResource("1_i26rj")
 
 [node name="Control" type="Control" parent="." unique_id=383503610]
 layout_mode = 3
@@ -36,3 +39,6 @@ text = "Start Game"
 layout_mode = 2
 text = "Exit
 "
+
+[connection signal="pressed" from="Control/AspectRatioContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="Control/AspectRatioContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
