@@ -169,6 +169,7 @@ public partial class Character : CharacterBody2D
 		if (Input.IsActionJustPressed("attack")) {
 			GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("punch");
 			IsAttacking = true;
+			GetNode<AudioStreamPlayer>("PunchPlayer").Play();
 			foreach (var node in GetNode<Area2D>("AttackHitbox").GetOverlappingBodies()) {
 				var damageable = node.GetNode<Damageable>("Damageable");
 				if (damageable != null) {

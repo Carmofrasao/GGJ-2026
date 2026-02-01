@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://bpwnfbf2rchqo" path="res://player/punc_0000_sprite-3.png" id="20_b2lkh"]
 [ext_resource type="Texture2D" uid="uid://c261ig8ti6a6n" path="res://player/punc_0001_sprite-1.png" id="21_0f5f2"]
 [ext_resource type="PackedScene" uid="uid://co41l4oe4bmjx" path="res://Damageable.tscn" id="21_rcm65"]
+[ext_resource type="AudioStream" uid="uid://c54nd8o15rws1" path="res://musicsfx/punch-140236.mp3" id="31_b2lkh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iu5xb"]
 shader = ExtResource("2_mj5a2")
@@ -158,11 +159,10 @@ height = 90.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rcm65"]
 size = Vector2(83, 108)
 
-[node name="Character" type="CharacterBody2D" unique_id=883167378 node_paths=PackedStringArray("Menu") groups=["Player"]]
+[node name="Character" type="CharacterBody2D" unique_id=883167378 groups=["Player"]]
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("2_7ig0a")
-Menu = NodePath("")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=997032692]
 material = SubResource("ShaderMaterial_iu5xb")
@@ -185,5 +185,8 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=1063934101]
 position = Vector2(41.5, 0)
 shape = SubResource("RectangleShape2D_rcm65")
+
+[node name="PunchPlayer" type="AudioStreamPlayer" parent="." unique_id=1034541241]
+stream = ExtResource("31_b2lkh")
 
 [connection signal="SetHealth" from="Damageable" to="Damageable" method="TakeDamage"]

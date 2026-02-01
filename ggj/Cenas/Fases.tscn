@@ -1,7 +1,9 @@
 [gd_scene format=4 uid="uid://x717c6gjg5jf"]
 
 [ext_resource type="TileSet" uid="uid://dx7lb08alicbh" path="res://Placeholder_ART/tileset.tres" id="1_p785x"]
+[ext_resource type="Texture2D" uid="uid://c1d04i0vqtg1r" path="res://bg/Background de Fundo - Azul.png" id="1_xvh6u"]
 [ext_resource type="PackedScene" uid="uid://c25dj31djvgqh" path="res://Character.tscn" id="2_bq0rg"]
+[ext_resource type="Texture2D" uid="uid://bakk2p4274snk" path="res://bg/Background Parallax - Marrom.png" id="2_vqmim"]
 [ext_resource type="PackedScene" uid="uid://bcqf5gotp0ss3" path="res://RhythmicEnemy.tscn" id="3_kyfrf"]
 [ext_resource type="Script" uid="uid://cdhxvghueo4ld" path="res://Cenas/Camera.cs" id="3_xni3e"]
 [ext_resource type="Script" uid="uid://24h132gmjo0i" path="res://Cenas/ZoomInTest.cs" id="4_46i0e"]
@@ -13,6 +15,26 @@
 size = Vector2(384, 216)
 
 [node name="Fases" type="Node2D" unique_id=330503938]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=927534366]
+position = Vector2(932, -18)
+texture = ExtResource("1_xvh6u")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=140454415]
+position = Vector2(929, -26)
+texture = ExtResource("2_vqmim")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D2" unique_id=1593685264]
+position = Vector2(1443, 399)
+texture = ExtResource("2_vqmim")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D2/Sprite2D2" unique_id=1524716808]
+position = Vector2(35, 409)
+texture = ExtResource("2_vqmim")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D2/Sprite2D2/Sprite2D2" unique_id=369032593]
+position = Vector2(35, 409)
+texture = ExtResource("2_vqmim")
 
 [node name="Player" parent="." unique_id=883167378 instance=ExtResource("2_bq0rg")]
 z_index = 1
