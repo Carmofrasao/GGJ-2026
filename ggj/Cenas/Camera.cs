@@ -10,7 +10,7 @@ public partial class Camera : Camera2D
 {
 	[Export] public Character character;
 	
-	public bool zoomIn {get; set;}
+	public bool zoomIn {get; set;} = false;
 
 	private static readonly Vector2[] CamTopLefts =
 	{
@@ -19,6 +19,10 @@ public partial class Camera : Camera2D
 		new Vector2( 486,  540), // Cam3
 		new Vector2(2406,  540), // Cam4
 	};
+	
+	public void setZoom(Vector2 vec){
+		SetZoom(vec);
+	}
 
 	public void CameraPanning()
 	{
@@ -59,6 +63,8 @@ public partial class Camera : Camera2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		CameraPanning();
+		if (zoomIn == false){
+			CameraPanning();
+		}
 	}
 }

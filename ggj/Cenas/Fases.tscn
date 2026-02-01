@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c25dj31djvgqh" path="res://Character.tscn" id="2_bq0rg"]
 [ext_resource type="Script" uid="uid://cdhxvghueo4ld" path="res://Cenas/Camera.cs" id="3_xni3e"]
 [ext_resource type="Script" uid="uid://24h132gmjo0i" path="res://Cenas/ZoomInTest.cs" id="4_46i0e"]
+[ext_resource type="PackedScene" uid="uid://clq71sv14srnh" path="res://gate.tscn" id="5_5alwl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5alwl"]
 size = Vector2(384, 216)
@@ -16,16 +17,7 @@ tile_set = ExtResource("1_p785x")
 
 [node name="Sprite2D" parent="." unique_id=883167378 instance=ExtResource("2_bq0rg")]
 z_index = 1
-position = Vector2(2624, 688)
-
-[node name="Sala4" type="Camera2D" parent="." unique_id=1672288258]
-position = Vector2(2406, 540)
-anchor_mode = 0
-
-[node name="Sala5" type="Camera2D" parent="." unique_id=62152100]
-position = Vector2(2432, 1088)
-anchor_mode = 0
-zoom = Vector2(5, 5)
+position = Vector2(2688, 170)
 
 [node name="Sala1" type="Camera2D" parent="." unique_id=1837960590 node_paths=PackedStringArray("character")]
 position = Vector2(-972, -540)
@@ -41,15 +33,28 @@ anchor_mode = 0
 position = Vector2(486, 540)
 anchor_mode = 0
 
-[node name="Area2D" type="Area2D" parent="." unique_id=833501953 node_paths=PackedStringArray("camera", "character")]
+[node name="Sala4" type="Camera2D" parent="." unique_id=1672288258]
+position = Vector2(2406, 540)
+anchor_mode = 0
+
+[node name="Sala5" type="Camera2D" parent="." unique_id=62152100]
+position = Vector2(2432, 1088)
+anchor_mode = 0
+zoom = Vector2(5, 5)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=833501953 node_paths=PackedStringArray("camera", "character", "gate")]
 position = Vector2(3112, 1136)
 script = ExtResource("4_46i0e")
-camera = NodePath("../Sala5")
+camera = NodePath("../Sala1")
 character = NodePath("../Sprite2D")
+gate = NodePath("../Node2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1719455275]
-position = Vector2(-488, 56)
+position = Vector2(-488, 61)
 shape = SubResource("RectangleShape2D_5alwl")
+
+[node name="Node2D" parent="." unique_id=1930140143 instance=ExtResource("5_5alwl")]
+position = Vector2(2477, 1075)
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="OnBodyEntered"]
 [connection signal="body_exited" from="Area2D" to="Area2D" method="OnBodyExited"]
