@@ -64,6 +64,11 @@ position = Vector2(3067, 1238)
 [node name="RhythmicEnemy11" parent="Cena1" unique_id=951811652 instance=ExtResource("3_kyfrf")]
 position = Vector2(3824, 969)
 
+[node name="Sprite2D" parent="." unique_id=883167378 node_paths=PackedStringArray("Menu") instance=ExtResource("2_bq0rg")]
+z_index = 1
+position = Vector2(-818, 83)
+Menu = NodePath("../Menu")
+
 [node name="Sala1" type="Camera2D" parent="." unique_id=1837960590 node_paths=PackedStringArray("character")]
 position = Vector2(-972, -540)
 anchor_mode = 0
