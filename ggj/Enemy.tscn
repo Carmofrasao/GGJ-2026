@@ -71,3 +71,6 @@ one_shot = true
 [node name="Damageable" parent="." unique_id=1870789681 node_paths=PackedStringArray("ShadedSprite") instance=ExtResource("3_2hac7")]
 InitialHealth = 14.0
 ShadedSprite = NodePath("../AnimatedSprite2D")
+
+[node name="AttackCooldownTimer" type="Timer" parent="." unique_id=1684148817]
+one_shot = true

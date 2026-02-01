@@ -21,7 +21,6 @@ public partial class Damageable : Node2D
 		if (!GetNode<Timer>("InvulTimer").IsStopped()) {
 			return;
 		}
-		GD.Print("Take Damage: " + damageAmount + " Have Health: " + Health);
 		GetNode<Timer>("InvulTimer").Start();
 		Health = Mathf.Max(0.0f, Health - damageAmount);
 		if (Health == 0) {
@@ -34,10 +33,8 @@ public partial class Damageable : Node2D
 	
 	public void Attack(Damageable damageable, float damageAmount) {
 		if (!GetNode<Timer>("AttackCooldownTimer").IsStopped()) {
-			GD.Print("Trying to attack " + damageable + " but not working using timer " + GetNode<Timer>("AttackCooldownTimer") + "!");
 			return;
 		}
-		GD.Print("Attacking with timer " + GetNode<Timer>("AttackCooldownTimer") + "!");
 		GetNode<Timer>("AttackCooldownTimer").Start();
 		damageable.TakeDamage(damageAmount);
 	}
