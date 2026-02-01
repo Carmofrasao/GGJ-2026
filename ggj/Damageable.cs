@@ -3,13 +3,8 @@ using System;
 
 public partial class Damageable : Node2D
 {
-	[Export] public float InitialHealth;
-	private float Health;
+	[Export] public float Health;
 	[Export] public AnimatedSprite2D ShadedSprite;
-	
-	public override void _Ready() {
-		Health = InitialHealth;
-	}
 	
 	public override void _Process(double delta) {
 		var timer = GetNode<Timer>("FlashTimer");
@@ -29,6 +24,9 @@ public partial class Damageable : Node2D
 			GetParent().QueueFree();
 		}
 		GetNode<Timer>("FlashTimer").Start();
+		if (GetParent() is Enemy enemy) {
+			enemy.CurrentState = EnemyState.Stunned;
+		}
 		return true;
 	}
 	
@@ -38,11 +36,12 @@ public partial class Damageable : Node2D
 		}
 		GetNode<Timer>("AttackCooldownTimer").Start();
 		if (damageable.TakeDamage(damageAmount)) {
-			var a = (Character)damageable.GetParent();
-			if (GetParent().GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH) {
-				a.KnockbackSpeed = -1f;
-			} else {
-				a.KnockbackSpeed = 1f;
+			if (damageable.GetParent() is Character character) {
+				if (GetParent().GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH) {
+					character.KnockbackSpeed = -1f;
+				} else {
+					character.KnockbackSpeed = 1f;
+				}
 			}
 		}
 	}

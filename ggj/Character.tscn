@@ -121,7 +121,7 @@ shape = SubResource("CapsuleShape2D_oolk3")
 debug_color = Color(0.09654651, 0.61018115, 0.6174744, 0.41960785)
 
 [node name="Damageable" parent="." unique_id=1870789681 node_paths=PackedStringArray("ShadedSprite") instance=ExtResource("21_rcm65")]
-InitialHealth = 10000.0
+Health = 33.0
 ShadedSprite = NodePath("../AnimatedSprite2D")
 
 [node name="AttackHitbox" type="Area2D" parent="." unique_id=1787072685]

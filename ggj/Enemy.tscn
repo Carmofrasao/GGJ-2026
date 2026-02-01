@@ -63,13 +63,10 @@ debug_color = Color(0.85394335, 0.31867146, 0.49112046, 0.41960785)
 one_shot = true
 
 [node name="Damageable" parent="." unique_id=1870789681 node_paths=PackedStringArray("ShadedSprite") instance=ExtResource("3_2hac7")]
-InitialHealth = 14.0
 ShadedSprite = NodePath("../AnimatedSprite2D")
 
 [node name="AttackCooldownTimer" type="Timer" parent="." unique_id=1684148817]
-wait_time = 0.5
 one_shot = true
 
 [node name="PreAttackCooldownTimer" type="Timer" parent="." unique_id=2008102358]
-wait_time = 0.5
 one_shot = true

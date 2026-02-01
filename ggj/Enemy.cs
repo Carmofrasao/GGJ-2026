@@ -2,7 +2,7 @@ using Godot;
 using System;
 using static Godot.GD;
 
-enum EnemyState {
+public enum EnemyState {
 	Idle,
 	ChasingPlayer,
 	OnPreAttackCooldown,
@@ -15,10 +15,21 @@ public partial class Enemy : CharacterBody2D
 	private float Speed = 200;
 	private float Gravity = 500;
 	private Node2D Player;
-	private EnemyState CurrentState = EnemyState.Idle;
+	public EnemyState CurrentState = EnemyState.Idle;
 	private float CurrentHorizontalSpeed = 0;
 	[Export] public float HorizontalDecaySpeed = 0.3f;
 	[Export] public float HorizontalAcceleration = 0.15f;
+	[Export] public float InitialHealth;
+	[Export] public float StunTime;
+	[Export] public float AttackCooldownTime;
+	[Export] public float PreAttackCooldownTime;
+	
+	public override void _Ready() {
+		GetNode<Damageable>("Damageable").Health = InitialHealth;
+		GetNode<Timer>("StunTimer").WaitTime = StunTime;
+		GetNode<Timer>("AttackCooldownTimer").WaitTime = AttackCooldownTime;
+		GetNode<Timer>("PreAttackCooldownTimer").WaitTime = PreAttackCooldownTime;
+	}
 	
 	public float GetHorizontalVelocity(float dir)
 	{
@@ -60,10 +71,6 @@ public partial class Enemy : CharacterBody2D
 		);
 		
 		MoveAndSlide();
-	}
-	
-	public void ReceiveDamage() {
-		CurrentState = EnemyState.Stunned;
 	}
 	
 	public override void _Process(double delta) 

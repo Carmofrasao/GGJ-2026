@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bcqf5gotp0ss3"]
+
+[ext_resource type="PackedScene" uid="uid://lobqv4xddv3n" path="res://Enemy.tscn" id="1_6g5hg"]
+
+[node name="RhythmicEnemy" type="Node2D" unique_id=723617817]
+
+[node name="Enemy" parent="." unique_id=941317421 instance=ExtResource("1_6g5hg")]
+InitialHealth = 14.0
+StunTime = 0.5
+AttackCooldownTime = 0.5
+PreAttackCooldownTime = 0.5
