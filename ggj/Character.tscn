@@ -30,12 +30,8 @@
 [ext_resource type="Texture2D" uid="uid://cp3ae66h7d1xs" path="res://player/player-run_0001_sprite2.png" id="16_gh722"]
 [ext_resource type="Texture2D" uid="uid://csgynmge0ivhp" path="res://player/player-run_0003_sprite-4.png" id="16_iu5xb"]
 [ext_resource type="Texture2D" uid="uid://bjjp7y22fb0mx" path="res://player/player-jump-2.png" id="17_gw0m8"]
-[ext_resource type="Texture2D" uid="uid://dk3hauv2lve84" path="res://player/player-run_0004_sprite-5.png" id="17_jfs23"]
 [ext_resource type="Texture2D" uid="uid://e436m1adlcus" path="res://player/player-jump-3.png" id="18_b2lkh"]
-[ext_resource type="Texture2D" uid="uid://l5fsvrohfcvc" path="res://player/player-run_0005_sprite-6.png" id="18_gh722"]
 [ext_resource type="Texture2D" uid="uid://b7xpiy7683cpx" path="res://player/punc_0002_sprite-2.png" id="19_gw0m8"]
-[ext_resource type="Texture2D" uid="uid://dkcefvwe20dw4" path="res://player/player-run_0006_sprite-7.png" id="19_k301r"]
-[ext_resource type="Texture2D" uid="uid://bfcxw17vq5dyv" path="res://player/player-run_0007_sprite-8.png" id="20_8wbt7"]
 [ext_resource type="Texture2D" uid="uid://bpwnfbf2rchqo" path="res://player/punc_0000_sprite-3.png" id="20_b2lkh"]
 [ext_resource type="Texture2D" uid="uid://c261ig8ti6a6n" path="res://player/punc_0001_sprite-1.png" id="21_0f5f2"]
 [ext_resource type="PackedScene" uid="uid://co41l4oe4bmjx" path="res://Damageable.tscn" id="21_rcm65"]
@@ -202,18 +198,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("16_iu5xb")
-}, {
-"duration": 1.0,
-"texture": ExtResource("17_jfs23")
-}, {
-"duration": 1.0,
-"texture": ExtResource("18_gh722")
-}, {
-"duration": 1.0,
-"texture": ExtResource("19_k301r")
-}, {
-"duration": 1.0,
-"texture": ExtResource("20_8wbt7")
 }],
 "loop": true,
 "name": &"run",
@@ -237,7 +221,6 @@ material = SubResource("ShaderMaterial_iu5xb")
 scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_iu5xb")
 animation = &"angry_punch"
-frame_progress = 0.055097423
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=802677230]
 shape = SubResource("CapsuleShape2D_oolk3")

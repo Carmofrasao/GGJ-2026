@@ -38,14 +38,19 @@ layout_mode = 2
 bbcode_enabled = true
 text = "[font_size=50]Trash Hunter[/font_size]
 
-[font_size=25]
+Jammers[font_size=25]
 • David Saade Machado
 • Daniel Carlos Alfredo (Dany)
 • Fernando Monteiro Kiotheka
 • Anderson Frasão
 • André Felipe de Almeida Pontes
 • Gabriel Pimentel Dolzan
-• Gustavo Pimentel Dal'Asta"
+• Gustavo Pimentel Dal'Asta[/font_size]
+
+Música
+[font_size=25]• Breno[/font_size]
+
+"
 fit_content = true
 horizontal_alignment = 1
 
@@ -61,6 +66,7 @@ text = "Exit
 [node name="MainMenuPlayer" type="AudioStreamPlayer" parent="." unique_id=1620965728]
 stream = ExtResource("2_eiy7p")
 autoplay = true
+parameters/looping = true
 
 [connection signal="pressed" from="Control/AspectRatioContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="Control/AspectRatioContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

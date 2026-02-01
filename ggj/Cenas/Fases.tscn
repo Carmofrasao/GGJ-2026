@@ -136,18 +136,21 @@ visible = false
 
 [node name="BossPlayer" type="AudioStreamPlayer" parent="." unique_id=1956667253]
 stream = ExtResource("11_w6165")
+parameters/looping = true
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=322677552]
 stream = ExtResource("11_w5xd4")
 autoplay = true
+parameters/looping = true
 
 [node name="Label" type="Label" parent="." unique_id=1010976068]
-offset_left = -814.0
-offset_top = -231.0
-offset_right = -774.0
-offset_bottom = -208.0
+offset_left = -915.0
+offset_top = -444.0
+offset_right = -373.0
+offset_bottom = -273.0
 text = "Z ataca
-F flutua"
+F flutua
+Você pode pular duas vezes!"
 label_settings = SubResource("LabelSettings_vqmim")
 
 [node name="Mascara Vermelha" parent="." unique_id=34186266 instance=ExtResource("12_w5xd4")]

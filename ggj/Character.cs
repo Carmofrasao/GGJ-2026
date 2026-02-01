@@ -77,10 +77,10 @@ public partial class Character : CharacterBody2D
 	
 	public void AttackInFront() {
 		GetNode<AudioStreamPlayer>("PunchPlayer").Play();
-		GetNode<Damageable>("Damageable").GetNode<Timer>("AttackCooldownTimer").Stop();
 		foreach (var node in GetNode<Area2D>("AttackHitbox").GetOverlappingBodies()) {
 			var damageable = node.GetNode<Damageable>("Damageable");
 			if (damageable != null) {
+				GetNode<Damageable>("Damageable").GetNode<Timer>("AttackCooldownTimer").Stop();
 				GetNode<Damageable>("Damageable").Attack(damageable, 1);
 			}
 		}
@@ -196,6 +196,8 @@ public partial class Character : CharacterBody2D
 			foreach (var node in GetNode<Area2D>("AttackHitbox").GetOverlappingBodies()) {
 				var damageable = node.GetNode<Damageable>("Damageable");
 				if (damageable != null) {
+					if (UsingRedThing)
+						GetNode<Damageable>("Damageable").GetNode<Timer>("AttackCooldownTimer").Stop();
 					GetNode<Damageable>("Damageable").Attack(damageable, 1);
 				}
 			}
