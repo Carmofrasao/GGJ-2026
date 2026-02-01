@@ -144,6 +144,12 @@ shape = SubResource("RectangleShape2D_5alwl")
 [node name="Node2D" parent="." unique_id=1930140143 instance=ExtResource("5_5alwl")]
 position = Vector2(2477, 1075)
 
+[node name="HUD" parent="." unique_id=820533709 node_paths=PackedStringArray("Player") instance=ExtResource("6_kyfrf")]
+Player = NodePath("../Sprite2D")
+
+[node name="Menu" parent="." unique_id=1423933993 instance=ExtResource("8_0ch8u")]
+visible = false
+
 [node name="RhythmicEnemy" parent="." unique_id=785729474 instance=ExtResource("3_kyfrf")]
 position = Vector2(195, 114)
 
