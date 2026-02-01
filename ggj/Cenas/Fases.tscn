@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://clq71sv14srnh" path="res://gate.tscn" id="5_5alwl"]
 [ext_resource type="PackedScene" uid="uid://bsmpsodb2jtxk" path="res://HUD.tscn" id="6_kyfrf"]
 [ext_resource type="PackedScene" uid="uid://wdb6c4pyh8fr" path="res://Menu.tscn" id="8_0ch8u"]
+[ext_resource type="AudioStream" uid="uid://d0fxhfx6cg4lv" path="res://musicsfx/music.mp3" id="11_vqmim"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5alwl"]
 size = Vector2(384, 216)
@@ -126,6 +127,10 @@ Player = NodePath("../Player")
 [node name="Menu" parent="." unique_id=1423933993 instance=ExtResource("8_0ch8u")]
 process_mode = 3
 visible = false
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=322677552]
+stream = ExtResource("11_vqmim")
+autoplay = true
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="OnBodyEntered"]
 [connection signal="body_exited" from="Area2D" to="Area2D" method="OnBodyExited"]
