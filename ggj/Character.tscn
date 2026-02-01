@@ -13,11 +13,16 @@
 [ext_resource type="Texture2D" uid="uid://yiml0qua3r5q" path="res://player/sprite-player_0008s_0000_sprite-3.png" id="10_e3mem"]
 [ext_resource type="Texture2D" uid="uid://1n3viqhmdhvr" path="res://player/sprite-player_0009s_0000_sprite-2.png" id="11_rcm65"]
 [ext_resource type="Texture2D" uid="uid://dlpifra88xo7w" path="res://player/sprite-player_0010s_0000_sprite-1.png" id="12_mj5a2"]
+[ext_resource type="Texture2D" uid="uid://b8sw405fb324p" path="res://player/player-jump-4.png" id="14_8wbt7"]
 [ext_resource type="Texture2D" uid="uid://bvuy7psunvf0g" path="res://player/player-run_0000_sprite1.png" id="14_jfs23"]
+[ext_resource type="Texture2D" uid="uid://ea1bcuekbbif" path="res://player/player-jump-5.png" id="15_jh1n3"]
 [ext_resource type="Texture2D" uid="uid://yedqjf4nlbsq" path="res://player/player-run_0002_sprite-3.png" id="15_mj5a2"]
+[ext_resource type="Texture2D" uid="uid://b7p3sqh0sc50x" path="res://player/player-jump-1.png" id="16_ek3kl"]
 [ext_resource type="Texture2D" uid="uid://cp3ae66h7d1xs" path="res://player/player-run_0001_sprite2.png" id="16_gh722"]
 [ext_resource type="Texture2D" uid="uid://csgynmge0ivhp" path="res://player/player-run_0003_sprite-4.png" id="16_iu5xb"]
+[ext_resource type="Texture2D" uid="uid://bjjp7y22fb0mx" path="res://player/player-jump-2.png" id="17_gw0m8"]
 [ext_resource type="Texture2D" uid="uid://dk3hauv2lve84" path="res://player/player-run_0004_sprite-5.png" id="17_jfs23"]
+[ext_resource type="Texture2D" uid="uid://e436m1adlcus" path="res://player/player-jump-3.png" id="18_b2lkh"]
 [ext_resource type="Texture2D" uid="uid://l5fsvrohfcvc" path="res://player/player-run_0005_sprite-6.png" id="18_gh722"]
 [ext_resource type="Texture2D" uid="uid://dkcefvwe20dw4" path="res://player/player-run_0006_sprite-7.png" id="19_k301r"]
 [ext_resource type="Texture2D" uid="uid://bfcxw17vq5dyv" path="res://player/player-run_0007_sprite-8.png" id="20_8wbt7"]
@@ -70,6 +75,31 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("14_8wbt7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_jh1n3")
+}],
+"loop": false,
+"name": &"jump_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_ek3kl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_gw0m8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_b2lkh")
+}],
+"loop": false,
+"name": &"jump_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("14_jfs23")
 }, {
 "duration": 1.0,
@@ -114,7 +144,7 @@ script = ExtResource("2_7ig0a")
 material = SubResource("ShaderMaterial_iu5xb")
 scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_iu5xb")
-animation = &"run"
+animation = &"jump_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=802677230]
 shape = SubResource("CapsuleShape2D_oolk3")

@@ -82,6 +82,7 @@ public partial class Character : CharacterBody2D
 	public void Jump()
 	{
 		Velocity = new Vector2(Velocity.X, JumpVelocity);
+		GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("jump_up");
 	}
 	
 	public void DoubleJump()
@@ -90,17 +91,20 @@ public partial class Character : CharacterBody2D
 
 		doubleJumpActive = true;
 		Velocity = new Vector2(Velocity.X, DoubleJumpVelocity);
+		GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("jump_up");
+		GetNode<AnimatedSprite2D>("AnimatedSprite2D").Frame = 0;
 	}
 
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{	
-		if (!Input.IsActionPressed("left") && !Input.IsActionPressed("right")) {
-			GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("idle");
-		} else {
-			GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("run");
-		}
+		if (IsOnFloor())
+			if (!Input.IsActionPressed("left") && !Input.IsActionPressed("right")) {
+				GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("idle");
+			} else {
+				GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("run");
+			}
 		
 		if (Input.IsActionPressed("left")) {
 			GetNode<AnimatedSprite2D>("AnimatedSprite2D").FlipH = true;
@@ -134,6 +138,11 @@ public partial class Character : CharacterBody2D
 		{
 			DoubleJump();
 			CanDoubleJump = false;
+		}
+		
+		if (Velocity.Y > 0.0f && !IsOnFloor()) {
+			GD.Print(Velocity.Y);
+			GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("jump_down");
 		}
 		
 		// Glide
