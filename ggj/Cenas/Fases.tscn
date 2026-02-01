@@ -17,7 +17,7 @@ tile_set = ExtResource("1_p785x")
 
 [node name="Sprite2D" parent="." unique_id=883167378 instance=ExtResource("2_bq0rg")]
 z_index = 1
-position = Vector2(2688, 170)
+position = Vector2(-818, 83)
 
 [node name="Sala1" type="Camera2D" parent="." unique_id=1837960590 node_paths=PackedStringArray("character")]
 position = Vector2(-972, -540)
@@ -44,6 +44,8 @@ zoom = Vector2(5, 5)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=833501953 node_paths=PackedStringArray("camera", "character", "gate")]
 position = Vector2(3112, 1136)
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("4_46i0e")
 camera = NodePath("../Sala1")
 character = NodePath("../Sprite2D")
