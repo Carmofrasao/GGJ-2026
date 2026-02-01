@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bt3v5yo275pyl"]
+
+[ext_resource type="Script" uid="uid://dwjbr6uiitkab" path="res://RoomLeaveTrigger.cs" id="1_ws385"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4cvuw"]
+size = Vector2(13.5, 162)
+
+[node name="RoomLeaveTrigger" type="Area2D" unique_id=1100194311 node_paths=PackedStringArray("character", "GameCamera")]
+script = ExtResource("1_ws385")
+HorizontalPosition = Vector2(2052, 0)
+character = NodePath("")
+PushAmount = 108.0
+GameCamera = NodePath("")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=197510762]
+position = Vector2(949, 81)
+shape = SubResource("RectangleShape2D_4cvuw")
