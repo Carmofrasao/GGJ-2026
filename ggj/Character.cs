@@ -20,8 +20,6 @@ public partial class Character : CharacterBody2D
 	
 	[Export] public float GlideTimeToDescent = 0.9f;
 	
-	[Export] public Menu Menu;
-	
 	 public float KnockbackSpeed = 0.0f;
 	
 	 public bool CanDoubleJump;
