@@ -8,6 +8,11 @@ public partial class Damageable : Node2D
 	
 	[Export] public float Health;
 	[Export] public AnimatedSprite2D ShadedSprite;
+	[Export] public float InvulTime = 0.5f;
+	
+	public override void _Ready() {
+		GetNode<Timer>("InvulTimer").WaitTime = InvulTime;
+	}
 	
 	public override void _Process(double delta) {
 		var timer = GetNode<Timer>("FlashTimer");

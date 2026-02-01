@@ -22,5 +22,7 @@ public partial class Hud : CanvasLayer
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (Player != null && Player.UsingRedThing)
+			GetNode<Node2D>("MascaraVermelhaHUD").SetVisible(true);
 	}
 }

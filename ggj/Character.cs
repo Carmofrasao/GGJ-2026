@@ -30,6 +30,8 @@ public partial class Character : CharacterBody2D
 	 public float FallGravity;
 	 public bool IsAttacking = false;
 	
+	 public bool UsingRedThing = false;
+	
 	 // Minha maluquice
 	 public float DoubleJumpVelocity;
 	
@@ -71,6 +73,17 @@ public partial class Character : CharacterBody2D
 		CurrentHorizontalSpeed = Mathf.Clamp(CurrentHorizontalSpeed, -2.0f, 2.0f);
 
 		return CurrentHorizontalSpeed;
+	}
+	
+	public void AttackInFront() {
+		GetNode<AudioStreamPlayer>("PunchPlayer").Play();
+		GetNode<Damageable>("Damageable").GetNode<Timer>("AttackCooldownTimer").Stop();
+		foreach (var node in GetNode<Area2D>("AttackHitbox").GetOverlappingBodies()) {
+			var damageable = node.GetNode<Damageable>("Damageable");
+			if (damageable != null) {
+				GetNode<Damageable>("Damageable").Attack(damageable, 1);
+			}
+		}
 	}
 
 	public float GetGravity()
@@ -169,7 +182,15 @@ public partial class Character : CharacterBody2D
 		if (Input.IsActionJustPressed("attack")) {
 			if (GetNode<Damageable>("Damageable").GetNode<Timer>("AttackCooldownTimer").IsStopped()) {
 				IsAttacking = true;
-				GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("punch");
+				if (UsingRedThing) {
+					GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("angry_punch");
+					GetNode<Timer>("IreTimer1").Start();
+					GetNode<Timer>("IreTimer2").Start();
+					GetNode<Timer>("IreTimer3").Start();
+					GetNode<Timer>("IreTimer4").Start();
+					GetNode<Timer>("IreTimer5").Start();
+				} else
+					GetNode<AnimatedSprite2D>("AnimatedSprite2D").Play("punch");
 				GetNode<AudioStreamPlayer>("PunchPlayer").Play();
 			}
 			foreach (var node in GetNode<Area2D>("AttackHitbox").GetOverlappingBodies()) {
@@ -183,10 +204,12 @@ public partial class Character : CharacterBody2D
 		}
 		
 		if (IsAttacking && (
-			GetNode<AnimatedSprite2D>("AnimatedSprite2D").Animation != "punch"
+			!(GetNode<AnimatedSprite2D>("AnimatedSprite2D").Animation == "punch" ||
+			GetNode<AnimatedSprite2D>("AnimatedSprite2D").Animation == "angry_punch")
 			|| !GetNode<AnimatedSprite2D>("AnimatedSprite2D").IsPlaying()
-		))
+		)) {
 			IsAttacking = false;
+		}
 		
 		MoveAndSlide();
 	}
