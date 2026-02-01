@@ -1,38 +1,89 @@
 using Godot;
-using System;
+using System.Threading.Tasks;
 
 public partial class RoomLeaveTrigger : Area2D
-{
-	[Export] public Vector2 HorizontalPosition { get; set; }
-	[Export] public Character character { get; set; }
-	[Export] public float PushAmount { get; set; }
-	[Export] public Camera2D GameCamera { get; set; }
+{	
+	[Export] public ScreenFader Fader { get; set; }
+	[Export] public Node2D RoomToReplace { get; set; }
+	[Export] public PackedScene TargetRoomScene { get; set; }
 	
-	private float lastDir = 0.0f;
+	[Export] public Character character { get; set; }
+	[Export] public float HorizontalCell { get; set; }
+	[Export] public float VerticalCell { get; set; }
+	[Export] public float CellSize { get; set; } = 54.0f;
+	
+	// CHaracter character
+
+	// Optional: prevents double-triggering if the player overlaps for multiple frames
+	private bool _loading = false;
 
 	public override void _Ready()
 	{
 		BodyEntered += OnBodyEntered;
 	}
 
-	private void OnBodyEntered(Node2D body)
+	private async Task DoRoomLeave()
 	{
-		if (body is not Character character) // your player class
-			return;
-		
-		float dir = Mathf.Sign(character.Velocity.X);
-		
-		GD.Print(dir);
+		// Fade out
+		await ToSignal(Fader.FadeToBlack(0.5f), Tween.SignalName.Finished);
 
-		// SNAP
-		if (lastDir != dir)
+		if (RoomToReplace == null || TargetRoomScene == null)
 		{
-			GameCamera.GlobalPosition += new Vector2(HorizontalPosition.X * dir, HorizontalPosition.Y);
-			character.GlobalPosition += new Vector2(PushAmount * dir, 0);
-			lastDir = dir;
+			GD.PushError("RoomLeaveTrigger: RoomToReplace or TargetRoomScene is null.");
+			_loading = false;
+			return;
 		}
 
-		// Optional: if you use camera smoothing, turn it off or it won't feel like a snap
-		GameCamera.PositionSmoothingEnabled = false;
+		// Save placement info
+		var parent = RoomToReplace.GetParent();
+		int index = RoomToReplace.GetIndex();
+		var oldTransform = RoomToReplace.GlobalTransform;
+
+		// Wait a frame so the old room is actually freed (prevents duplicates / overlap issues)
+		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+
+		// Add new room
+		var newRoom = TargetRoomScene.Instantiate<Node2D>();
+		parent.AddChild(newRoom);
+		parent.MoveChild(newRoom, index);
+
+		// Put it exactly where the old one was
+		newRoom.GlobalTransform = oldTransform;
+
+		// Remove old room
+		RoomToReplace.QueueFree();
+
+		// Update reference so next trigger works if needed
+		RoomToReplace = newRoom;
+		
+		GD.Print(character.GlobalPosition);
+		
+		if (VerticalCell != 0.0f && HorizontalCell != 0.0f)
+			character.GlobalPosition = new Vector2(character.GlobalPosition.X + (HorizontalCell * CellSize), character.GlobalPosition.Y + (VerticalCell * CellSize));
+		else if (VerticalCell != 0.0f)
+			character.GlobalPosition = new Vector2(character.GlobalPosition.X, character.GlobalPosition.Y  + (VerticalCell * CellSize));
+		else if (HorizontalCell != 0.0f)
+			character.GlobalPosition = new Vector2(character.GlobalPosition.X + (HorizontalCell * CellSize), character.GlobalPosition.Y);
+
+		GD.Print(character.GlobalPosition);
+
+		// Fade in
+		await ToSignal(Fader.FadeFromBlack(0.5f), Tween.SignalName.Finished);
+
+		_loading = false;
+	}
+
+	private void OnBodyEntered(Node2D body)
+	{
+		if (_loading) return;
+		if (body is not Character) return;
+		if (Fader == null) return;
+		if (RoomToReplace == null) return;
+		if (TargetRoomScene == null) return;
+
+		GD.Print("Entrou");
+
+		_loading = true;
+		_ = DoRoomLeave();
 	}
 }
