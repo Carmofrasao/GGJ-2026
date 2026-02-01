@@ -7,5 +7,5 @@
 [node name="Enemy" parent="." unique_id=941317421 instance=ExtResource("1_6g5hg")]
 InitialHealth = 2.0
 StunTime = 0.5
-AttackCooldownTime = 0.5
-PreAttackCooldownTime = 0.5
+AttackCooldownTime = 1.0
+PreAttackCooldownTime = 1.0
